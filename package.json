@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/taylorbryant/next-starter-tailwind#readme",
   "dependencies": {
-    "next": "11.1.2",
+    "next": "12.1.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
