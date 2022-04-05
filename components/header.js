@@ -47,7 +47,7 @@ export default function Header() {
         >
           {[
             { title: "Home", route: "/" },
-            { title: "About", route: "/about" },
+            { title: "Dash", route: "/home" },
           ].map(({ route, title }) => (
             <li className="mt-3 md:mt-0 md:ml-6" key={title}>
               <Link href={route}>
