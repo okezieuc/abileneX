@@ -1,17 +1,29 @@
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import getUserIdFromZoomAccountId from "utils/getUserIdFromZoomAccountId";
 
 export default function handler(req, res) {
   console.log(req.body);
-  console.log({
-    type: "message",
-    text: "You sent " + req.body.payload.cmd,
-  });
-
   createPoll();
 
   async function createPoll() {
-    const user_id = await getUserIdFromZoomAccountId(req.body.payload.userId)
-    getChatbotToken()
+    const creator_id = await getUserIdFromZoomAccountId(
+      req.body.payload.userId
+    );
+
+    // create entry for new pool in supabase database
+    const { data, error } = await supabaseClient.from("polls").insert([
+      {
+        creator_id,
+        accepting_votes: true,
+        title: req.body.payload.cmd,
+      },
+    ]);
+
+    if (!error) {
+      getChatbotToken();
+    } else {
+      console.error("Failed to create poll");
+    }
   }
 
   async function getChatbotToken() {
