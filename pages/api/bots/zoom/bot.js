@@ -1,10 +1,18 @@
+import getUserIdFromZoomAccountId from "utils/getUserIdFromZoomAccountId";
+
 export default function handler(req, res) {
   console.log(req.body);
   console.log({
     type: "message",
     text: "You sent " + req.body.payload.cmd,
   });
-  getChatbotToken();
+
+  createPoll();
+
+  async function createPoll() {
+    const user_id = await getUserIdFromZoomAccountId(req.body.payload.userId)
+    getChatbotToken()
+  }
 
   async function getChatbotToken() {
     try {
