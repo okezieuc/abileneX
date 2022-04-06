@@ -1,4 +1,4 @@
-export default function SearchIcon() {
+export default function RightIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,10 +10,9 @@ export default function SearchIcon() {
       stroke-width="1"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="feather feather-search"
+      class="feather feather-chevron-right"
     >
-      <circle cx="11" cy="11" r="8"></circle>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   );
 }

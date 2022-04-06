@@ -32,10 +32,10 @@ export default function AppLayout({ children }) {
         </div>
       </div>
       <div className="flex-1 grid grid-cols-7">
-        <div className="col-span-5">{children}</div>
+        <div className="col-span-5 px-16">{children}</div>
         <div className="col-span-2 h-screen bg-zinc-50 py-16 px-9">
           <div className="h-full flex flex-col">
-            <div className="h-36 w-36 bg-zinc-100 rounded-full mx-auto mb-6"></div>
+            <div className="h-28 w-28 bg-zinc-100 rounded-full mx-auto mb-6"></div>
             <div className="mb-12 text-2xl text-zinc-500 text-center">John Doe</div>
             <div className="bg-zinc-800 text-white flex-1 rounded-xl px-8 py-8">
                 <div className="h-full flex flex-col">
