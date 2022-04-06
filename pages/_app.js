@@ -7,7 +7,7 @@ import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 function MyApp({ Component, pageProps }) {
   return (
     <UserProvider supabaseClient={supabaseClient}>
-      <Layout>
+      <>
         <Head>
           <title>Next.js Starter Tailwind</title>
           <meta
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
 
         <Component {...pageProps} />
-      </Layout>
+      </>
     </UserProvider>
   );
 }
