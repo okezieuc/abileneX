@@ -36,10 +36,10 @@ export default function AppLayout({ children }) {
         <div className="col-span-2 h-screen bg-zinc-50 py-16 px-9">
           <div className="h-full flex flex-col">
             <div className="h-36 w-36 bg-zinc-100 rounded-full mx-auto mb-6"></div>
-            <div className="mb-12 text-3xl text-zinc-500 text-center">John Doe</div>
+            <div className="mb-12 text-2xl text-zinc-500 text-center">John Doe</div>
             <div className="bg-zinc-800 text-white flex-1 rounded-xl px-8 py-8">
                 <div className="h-full flex flex-col">
-                    <div className="text-3xl font-semibold">Create a poll in three quick steps.</div>
+                    <div className="text-3xl">Create a poll in three quick steps.</div>
                     <div className="flex-1"></div>
                     <div className="bg-white px-9 py-2 text-zinc-800 text-lg w-max rounded-full">Create Poll</div>
                 </div>
