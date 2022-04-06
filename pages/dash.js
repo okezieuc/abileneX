@@ -22,6 +22,8 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 gap-8 mt-8">
             <PollListItem />
             <PollListItem />
+            <PollListItem />
+            <PollListItem />
         </div>
       </div>
     </AppLayout>
