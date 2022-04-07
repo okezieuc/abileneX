@@ -4,8 +4,10 @@ import LinkCopyComponent from "@components/dashboard/create/linkCopyComponent";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import CreatePageImage from "../../public/girl-working-on-laptop.png";
 
 export default function CreatePollPage() {
   const { user, error } = useUser();
@@ -41,17 +43,21 @@ export default function CreatePollPage() {
   return (
     <AppLayout>
       <div className="py-16">
-        <div>
+        <div className="relative">
           <div className="text-2xl text-zinc-500 mb-7 font-light">Awesome!</div>
           <h1 className="text-4xl font-medium max-w-md mb-8">
             Let’s get started getting feedback on your ideas.
           </h1>
+          <div className="w-80 absolute -top-4 -right-4">
+            <Image src={CreatePageImage} />
+          </div>
         </div>
         {newPollTitle}
-        <button className="block" onClick={() => setCurrentStep(1)}>
+        <button className="hidden" onClick={() => setCurrentStep(1)}>
           Reset step counter; Current: {currentStep}
         </button>
-        <div className="mt-16 w-full">
+        <div className="border-b mt-24 mb-16 -mx-16"></div>
+        <div className="w-full">
           <CreatePollStep
             step={1}
             heading="What are we voting on?"

@@ -3,11 +3,13 @@ import HomeIcon from "./icons/homeIcon";
 import InboxIcon from "./icons/inboxIcon";
 import SettingsIcon from "./icons/settingsIcon";
 import UserIcon from "./icons/userIcon";
+import RightSectionContextMenuImage from "../../public/cactus-in-pot.png";
+import Image from "next/image";
 
 export default function AppLayout({ children }) {
   return (
     <div className="flex">
-      <div className="w-28 h-screen bg-zinc-50 px-6 py-9 flex flex-col sticky top-0">
+      <div className="w-28 h-screen bg-zinc-100 px-6 py-9 flex flex-col sticky top-0">
         <div>
           <AbileneXLogo />
         </div>
@@ -38,9 +40,9 @@ export default function AppLayout({ children }) {
       </div>
       <div className="flex-1 grid grid-cols-7">
         <div className="col-span-5 px-16">{children}</div>
-        <div className="col-span-2 h-screen bg-zinc-50 py-16 px-9 sticky top-0">
+        <div className="col-span-2 h-screen bg-zinc-100 py-16 px-9 sticky top-0">
           <div className="h-full flex flex-col">
-            <div className="h-28 w-28 bg-zinc-100 rounded-full mx-auto mb-6"></div>
+            <div className="h-28 w-28 bg-zinc-300 rounded-full mx-auto mb-6"></div>
             <div className="mb-12 text-2xl text-zinc-500 text-center">
               John Doe
             </div>
@@ -55,6 +57,9 @@ export default function AppLayout({ children }) {
                     Create Poll
                   </a>
                 </Link>
+              </div>
+              <div className="w-32 absolute bottom-16 -right-0 z-0">
+                <Image src={RightSectionContextMenuImage} />
               </div>
             </div>
           </div>

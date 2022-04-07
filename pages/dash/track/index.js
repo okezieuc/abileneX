@@ -1,4 +1,6 @@
 import AppLayout from "@components/dashboard/appLayout";
+import Image from "next/image";
+import StatusPageImage1 from "../../../public/girl-stretching.png";
 
 export default function TrackPollPage() {
   return (
@@ -12,8 +14,12 @@ export default function TrackPollPage() {
             Should we build an anonymous voting app for young startup founders?
           </h1>
         </div>
-        <div className="flex-1"></div>
-        <div className="mt-12">
+        <div className="flex-1">
+          <div className="w-56 mx-auto">
+            <Image src={StatusPageImage1} />
+          </div>
+        </div>
+        <div className="mt-4">
           <div className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto">
             End poll and view results
           </div>

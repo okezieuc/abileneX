@@ -3,8 +3,10 @@ import PollListItem from "@components/dashboard/dash/pollListItem";
 import SearchIcon from "@components/dashboard/icons/searchIcon";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import DashBoardImage from '../../public/girl-sitting-at-computer.png'
 
 export default function Dashboard() {
   const { user, error } = useUser();
@@ -26,7 +28,7 @@ export default function Dashboard() {
   return (
     <AppLayout>
       <div className="py-16">
-        <div>
+        <div className="relative">
           <div className="text-2xl text-zinc-500 mb-7 font-light">Hi John</div>
           <h1 className="text-4xl font-medium max-w-md mb-6">
             It’s time to build with confidence. Create a poll.
@@ -36,8 +38,11 @@ export default function Dashboard() {
               Create Poll
             </a>
           </Link>
+          <div className="w-72 absolute top-0 right-0">
+          <Image src={DashBoardImage} />
+          </div>
         </div>
-        <div className="flex items-center mt-16">
+        <div className="flex items-center mt-32">
           <div>
             <SearchIcon />
           </div>
