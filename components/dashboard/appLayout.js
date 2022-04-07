@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HomeIcon from "./icons/homeIcon";
 import InboxIcon from "./icons/inboxIcon";
 import SettingsIcon from "./icons/settingsIcon";
@@ -13,8 +14,12 @@ export default function AppLayout({ children }) {
         <div className="flex-1 w-max mx-auto h-max text-zinc-400">
           <div className="flex flex-col gap-9 h-full">
             <div className="flex-1"></div>
-            <div className="text-sky-700">
-              <HomeIcon />
+            <div className="text-sky-700 active:text-sky-800">
+              <Link href="/dash">
+                <a>
+                  <HomeIcon />
+                </a>
+              </Link>
             </div>
             <div>
               <InboxIcon />
@@ -36,13 +41,21 @@ export default function AppLayout({ children }) {
         <div className="col-span-2 h-screen bg-zinc-50 py-16 px-9 sticky top-0">
           <div className="h-full flex flex-col">
             <div className="h-28 w-28 bg-zinc-100 rounded-full mx-auto mb-6"></div>
-            <div className="mb-12 text-2xl text-zinc-500 text-center">John Doe</div>
+            <div className="mb-12 text-2xl text-zinc-500 text-center">
+              John Doe
+            </div>
             <div className="bg-zinc-800 text-white flex-1 rounded-xl px-8 py-8">
-                <div className="h-full flex flex-col">
-                    <div className="text-3xl">Create a poll in three quick steps.</div>
-                    <div className="flex-1"></div>
-                    <div className="bg-white px-9 py-2 text-zinc-800 text-lg w-max rounded-full">Create Poll</div>
+              <div className="h-full flex flex-col">
+                <div className="text-3xl">
+                  Create a poll in three quick steps.
                 </div>
+                <div className="flex-1"></div>
+                <Link href="/dash/create">
+                  <a className="bg-white hover:bg-zinc-50 active:bg-zinc-100 px-9 py-2 text-zinc-800 text-lg w-max rounded-full">
+                    Create Poll
+                  </a>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
