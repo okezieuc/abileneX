@@ -20,17 +20,19 @@ export default function CreatePollPage() {
         <button onClick={() => setCurrentStep(1)}>
           Reset step counter; Current: {currentStep}
         </button>
-        <div className="mt-16">
+        <div className="mt-16 w-full">
           <CreatePollStep
             step={1}
             heading="What are we voting on?"
             currentStep={currentStep}
             moveToNextStepFunc={() => setCurrentStep(currentStep + 1)}
           >
-            <div className="text-zinc-500 text-xl mb-4">
-              e.g. Should we build an anonymous voting app for young startup
-              founders?
-            </div>
+            <textarea
+              type="textarea"
+              placeholder="e.g. Should we build an anonymous voting app for young startup founders?"
+              className="w-full text-xl border-zinc-400 border-0 border-b py-4 mb-4"
+              autoFocus={true}
+            />
           </CreatePollStep>
           <CreatePollStep
             step={2}

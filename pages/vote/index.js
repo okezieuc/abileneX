@@ -18,7 +18,8 @@ export default function PollVotePage() {
         </div>
         {ideaVoteRating}
         <div>
-          <div className="flex gap-4 w-min mx-auto">
+          <div className="flex gap-4 w-min mx-auto items-center">
+            <div className="w-max text-zinc-700 text-lg font-semibold mr-4">Nah</div>
             <VoteButton
               number={1}
               setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
@@ -44,12 +45,15 @@ export default function PollVotePage() {
               setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
               ideaVoteRating={ideaVoteRating}
             />
+            <div className="w-max text-zinc-700 text-lg font-semibold ml-4">Awesome idea!</div>
           </div>
           <div className="max-w-md mx-auto mt-9">
-            Textbox for feedback comes here <br />
-            (optional) Okezie will appreciate you sharing more detail about why
-            you voted what you did, how to improve the idea, or alternatives you
-            suggest?
+            <textarea
+              type="textarea"
+              placeholder="(optional) Okezie will appreciate you sharing more detail about why you voted what you did, how to improve the idea, or alternatives you suggest?"
+              className="w-full text-lg border-zinc-500 mb-4 rounded-md h-32"
+              autoFocus={true}
+            />
           </div>
           <div className="mt-12">
             <div className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto">

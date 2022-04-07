@@ -8,13 +8,13 @@ export default function CreatePollStep({
 }) {
   const collapsed = currentStep != step;
   return (
-    <div className="flex gap-4 mb-8">
+    <div className="flex gap-4 mb-8 w-full">
       <div className="px-4 py-2 h-min rounded-full bg-sky-700 text-white">
         {step}
       </div>
-      <div className="max-w-xl">
+      <div className="max-w-xl w-full">
         <div className="text-2xl mb-4">{heading}</div>
-        <div className={`${collapsed ? "hidden" : "block"}`}>
+        <div className={`${collapsed ? "hidden" : "block w-full"}`}>
           {children}
           <div className={`${hasProceed ? "block" : "hidden"}`}>
             <button
