@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export default function LinkCopyComponent({
-  link = "https://abilenex.okezie.dev/abcd-1234-wxyz-5678",
-}) {
+export default function LinkCopyComponent({ id = "abcd-1234-wxyz-5678" }) {
   const [clickedCopy, setClickedCopy] = useState(false);
+  const link = `https://abilenex.okezie.dev/${id}`;
+
   return (
     <div className="w-96 px-2 py-2 flex border border-zinc-500 rounded-md items-center gap-2 mb-4">
       <div className="flex-1 truncate">{link}</div>
