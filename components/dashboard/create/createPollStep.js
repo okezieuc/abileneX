@@ -9,7 +9,13 @@ export default function CreatePollStep({
   const collapsed = currentStep != step;
   return (
     <div className="flex gap-4 mb-8 w-full">
-      <div className="px-4 py-2 h-min rounded-full bg-sky-700 text-white">
+      <div
+        className={`px-4 py-2 h-min rounded-full text-white ${
+          currentStep >= step
+            ? "bg-sky-700 text-white"
+            : "bg-zinc-300 text-zinc-700"
+        }`}
+      >
         {step}
       </div>
       <div className="max-w-xl w-full">
