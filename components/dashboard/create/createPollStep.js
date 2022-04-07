@@ -1,18 +1,28 @@
-export default function CreatePollStep() {
+export default function CreatePollStep({
+  heading,
+  step,
+  hasProceed = true,
+  moveToNextStepFunc,
+  currentStep,
+  children,
+}) {
+  const collapsed = currentStep != step;
   return (
-    <div className="flex gap-4 mb-12">
-      <div className="px-4 py-2 h-min rounded-full bg-sky-700">1</div>
+    <div className="flex gap-4 mb-8">
+      <div className="px-4 py-2 h-min rounded-full bg-sky-700 text-white">
+        {step}
+      </div>
       <div className="max-w-xl">
-        <div className="text-2xl mb-4">What are we voting on?</div>
-        <div>
-          <div className="text-zinc-500 text-xl mb-4">
-            e.g. Should we build an anonymous voting app for young startup
-            founders?
-          </div>
-        </div>
-        <div>
-          <div className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2">
-            Proceed
+        <div className="text-2xl mb-4">{heading}</div>
+        <div className={`${collapsed ? "hidden" : "block"}`}>
+          {children}
+          <div className={`${hasProceed ? "block" : "hidden"}`}>
+            <button
+              className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2"
+              onClick={moveToNextStepFunc}
+            >
+              Proceed
+            </button>
           </div>
         </div>
       </div>
