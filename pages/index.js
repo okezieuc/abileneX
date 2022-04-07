@@ -1,10 +1,12 @@
 import AppLayout from "@components/dashboard/appLayout";
+import Header from "@components/header";
 import Image from "next/image";
 
 export default function IndexPage() {
   return (
     <AppLayout>
       <div className="flex flex-col items-center justify-center space-y-12">
+        <Header />
         <Image
           src="/team-of-critters.svg"
           alt="Four one-eyed aliens playing"

@@ -1,9 +1,28 @@
 import AppLayout from "@components/dashboard/appLayout";
 import PollListItem from "@components/dashboard/dash/pollListItem";
 import SearchIcon from "@components/dashboard/icons/searchIcon";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
+  const { user, error } = useUser();
+  const [pollListData, setPollListData] = useState(null);
+
+  useEffect(() => {
+    async function loadPollListData() {
+      const { data } = await supabaseClient
+        .from("polls")
+        .select("title, poll_id, accepting_votes");
+      setPollListData(data);
+
+      console.log("loaded poll data");
+    }
+
+    if (user) loadPollListData();
+  }, [user]);
+
   return (
     <AppLayout>
       <div className="py-16">
@@ -27,10 +46,15 @@ export default function Dashboard() {
           <div className="text-sm">4 results</div>
         </div>
         <div className="grid grid-cols-2 gap-8 mt-8">
-          <PollListItem />
-          <PollListItem />
-          <PollListItem />
-          <PollListItem />
+          {pollListData
+            ? pollListData.map((poll) => (
+                <PollListItem
+                  title={poll.title}
+                  id={poll.poll_id}
+                  acceptingVotes={poll.accepting_votes}
+                />
+              ))
+            : "Loading poll data"}
         </div>
       </div>
     </AppLayout>
