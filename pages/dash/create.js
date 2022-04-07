@@ -1,5 +1,6 @@
 import AppLayout from "@components/dashboard/appLayout";
 import CreatePollStep from "@components/dashboard/create/createPollStep";
+import LinkCopyComponent from "@components/dashboard/create/linkCopyComponent";
 import { useState } from "react";
 
 export default function CreatePollPage() {
@@ -39,7 +40,9 @@ export default function CreatePollPage() {
             currentStep={currentStep}
             heading="Share your poll link."
             moveToNextStepFunc={() => setCurrentStep(currentStep + 1)}
-          ></CreatePollStep>
+          >
+            <LinkCopyComponent />
+          </CreatePollStep>
           <CreatePollStep
             step={3}
             currentStep={currentStep}
