@@ -10,7 +10,7 @@ export default function PollListItem({
       <div className="flex-1"></div>
       <div>
         <div className="flex items-end">
-          <Link href="/dash/track">
+          <Link href={`/dash/track/${poll_id}`}>
             <a className="flex-1 text-2xl">{title}</a>
           </Link>
           <Link href="/dash/track">
