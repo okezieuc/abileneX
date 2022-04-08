@@ -32,10 +32,11 @@ export default function TrackPollPage() {
     setPollData(data[0]); // update poll data
 
     if (data[0].accepting_votes == true) {
+      setPollData(data[0]);
       return;
     } else {
       // continue fetching otherwise
-      const { data } = await supabaseClient
+      const { data: voteData } = await supabaseClient
         .from("poll_votes")
         .select("vote_id, idea_rating, idea_comment")
         .eq("poll_id", router.query.poll_id);
@@ -43,7 +44,7 @@ export default function TrackPollPage() {
       let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
       let temportaryPollVoteComments = [];
 
-      data.forEach((vote) => {
+      voteData.forEach((vote) => {
         temporaryPollVoteRatings[vote.idea_rating] =
           temporaryPollVoteRatings[vote.idea_rating] + 1;
         if (vote.idea_comment !== null) {
@@ -53,8 +54,8 @@ export default function TrackPollPage() {
 
       setPollVoteRatings(temporaryPollVoteRatings);
       setPollVoteComments(temportaryPollVoteComments);
-
-      setPollVoteData(data);
+      setPollData(data[0]);
+      setPollVoteData(voteData);
     }
   }
 
@@ -99,10 +100,39 @@ export default function TrackPollPage() {
                   </button>
                 </div>
               </>
-            ) : (
+            ) : pollVoteRatings ? (
               <>
-                <div className="grid grid-cols-2">Poll results</div>
+                <div className="grid grid-cols-2 mt-8 divide-x divide-solid">
+                  <div className="grid grid-cols-2 h-min">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div className="py-4 text-xl text-center ">
+                        <span className="text-4xl font-semibold mr-2">
+                          {num}
+                        </span>{" "}
+                        {pollVoteRatings[num]} vote(s)
+                      </div>
+                    ))}
+                  </div>
+                  <div className="">
+                    <h2 className="text-3xl font-semibold mb-4 pl-6">
+                      Feedback responses
+                    </h2>
+                    {pollVoteComments.length != 0 ? (
+                      <div className="divide-y">
+                        {pollVoteComments.map((comment) => (
+                          <div className="px-6 py-4">{comment}</div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="pl-6">
+                        No optional comments received
+                      </div>
+                    )}
+                  </div>
+                </div>
               </>
+            ) : (
+              "Loading poll results"
             )}
           </>
         ) : (
