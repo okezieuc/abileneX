@@ -6,7 +6,7 @@ export default function PollListItem({
   poll_id,
 }) {
   return (
-    <div className="w-full flex flex-col h-40 bg-zinc-50 rounded-xl px-4 py-4 hover:shadow-sm border border-zinc-50 hover:border-zinc-200 transition-all">
+    <div className="w-full flex flex-col h-40 bg-zinc-100 rounded-xl px-4 py-4 hover:shadow-sm border border-zinc-200 hover:border-zinc-300 transition-all">
       <div className="flex-1"></div>
       <div>
         <div className="flex items-end">
