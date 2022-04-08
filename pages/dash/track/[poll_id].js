@@ -1,6 +1,7 @@
 import AppLayout from "@components/dashboard/appLayout";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -73,72 +74,77 @@ export default function TrackPollPage() {
 
   return (
     <AppLayout>
-      <div className="flex my-16 flex-col min-h-[75%]">
-        {pollData ? (
-          <>
-            <div className="text-center">
-              <div className="text-2xl text-zinc-500 mb-7 font-light">
-                {pollData.number_of_votes_received} Response(s) Received
+      <>
+        <div className="flex my-16 flex-col min-h-[75%]">
+          {pollData ? (
+            <>
+              <Head>
+                <title>Poll Status: {pollData.title}</title>
+              </Head>
+              <div className="text-center">
+                <div className="text-2xl text-zinc-500 mb-7 font-light">
+                  {pollData.number_of_votes_received} Response(s) Received
+                </div>
+                <h1 className="text-4xl font-medium max-w-md mb-6 mx-auto">
+                  {pollData.title}
+                </h1>
               </div>
-              <h1 className="text-4xl font-medium max-w-md mb-6 mx-auto">
-                {pollData.title}
-              </h1>
-            </div>
-            {pollData.accepting_votes ? (
-              <>
-                <div className="flex-1">
-                  <div className="w-56 mx-auto">
-                    <Image src={StatusPageImage1} />
+              {pollData.accepting_votes ? (
+                <>
+                  <div className="flex-1">
+                    <div className="w-56 mx-auto">
+                      <Image src={StatusPageImage1} />
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4 w-max mx-auto">
-                  <button
-                    className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto"
-                    onClick={() => stopPollAcceptingVotes()}
-                  >
-                    End poll and view results
-                  </button>
-                </div>
-              </>
-            ) : pollVoteRatings ? (
-              <>
-                <div className="grid grid-cols-2 mt-8 divide-x divide-solid">
-                  <div className="grid grid-cols-2 h-min">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div className="py-4 text-xl text-center ">
-                        <span className="text-4xl font-semibold mr-2">
-                          {num}
-                        </span>{" "}
-                        {pollVoteRatings[num]} vote(s)
-                      </div>
-                    ))}
+                  <div className="mt-4 w-max mx-auto">
+                    <button
+                      className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto"
+                      onClick={() => stopPollAcceptingVotes()}
+                    >
+                      End poll and view results
+                    </button>
                   </div>
-                  <div className="">
-                    <h2 className="text-3xl font-semibold mb-4 pl-6">
-                      Feedback responses
-                    </h2>
-                    {pollVoteComments.length != 0 ? (
-                      <div className="divide-y">
-                        {pollVoteComments.map((comment) => (
-                          <div className="px-6 py-4">{comment}</div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="pl-6">
-                        No optional comments received
-                      </div>
-                    )}
+                </>
+              ) : pollVoteRatings ? (
+                <>
+                  <div className="grid grid-cols-2 mt-8 divide-x divide-solid">
+                    <div className="grid grid-cols-2 h-min">
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <div className="py-4 text-xl text-center ">
+                          <span className="text-4xl font-semibold mr-2">
+                            {num}
+                          </span>{" "}
+                          {pollVoteRatings[num]} vote(s)
+                        </div>
+                      ))}
+                    </div>
+                    <div className="">
+                      <h2 className="text-3xl font-semibold mb-4 pl-6">
+                        Feedback responses
+                      </h2>
+                      {pollVoteComments.length != 0 ? (
+                        <div className="divide-y">
+                          {pollVoteComments.map((comment) => (
+                            <div className="px-6 py-4">{comment}</div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="pl-6">
+                          No optional comments received
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </>
-            ) : (
-              "Loading poll results"
-            )}
-          </>
-        ) : (
-          "loading poll data"
-        )}
-      </div>
+                </>
+              ) : (
+                "Loading poll results"
+              )}
+            </>
+          ) : (
+            "loading poll data"
+          )}
+        </div>
+      </>
     </AppLayout>
   );
 }

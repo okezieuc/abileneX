@@ -2,6 +2,7 @@ import AppLayout from "@components/dashboard/appLayout";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import VoteButton from "@components/dashboard/vote/voteButton";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import Head from "next/head";
 import { useState } from "react";
 
 export default function PollVotePage({ pollData }) {
@@ -38,6 +39,10 @@ export default function PollVotePage({ pollData }) {
 
   return (
     <AppLayout>
+      <>
+      <Head>
+        <title>Vote: {pollData.title}</title>
+      </Head>
       <div className="my-16">
         <div className="text-center">
           <div className="text-2xl text-zinc-500 mb-7 font-light">
@@ -110,7 +115,7 @@ export default function PollVotePage({ pollData }) {
             </button>
           </div>
         </div>
-      </div>
+      </div></>
     </AppLayout>
   );
 }

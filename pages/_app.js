@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps }) {
     <UserProvider supabaseClient={supabaseClient}>
       <>
         <Head>
-          <title>Next.js Starter Tailwind</title>
+          <title>AbileneX</title>
           <meta
             name="Description"
-            content="A Next.js starter styled using Tailwind CSS."
+            content="Get honest feedback on your ideas so you can build with confidence."
           />
         </Head>
 

@@ -4,6 +4,7 @@ import LinkCopyComponent from "@components/dashboard/create/linkCopyComponent";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -43,6 +44,9 @@ export default function CreatePollPage() {
   return (
     <AppLayout>
       <div className="py-16">
+      <Head>
+          <title>Create AbileneX Poll</title>
+        </Head>
         <div className="relative">
           <div className="text-2xl text-zinc-500 mb-7 font-light">Awesome!</div>
           <h1 className="text-4xl font-medium max-w-md mb-8">
