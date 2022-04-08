@@ -6,15 +6,15 @@ export default function PollListItem({
   poll_id,
 }) {
   return (
-    <div className="w-full flex flex-col h-40 bg-zinc-100 rounded-xl px-4 py-4 hover:shadow-sm border border-zinc-200 hover:border-zinc-300 transition-all">
+    <div className="group w-full flex flex-col h-40 bg-zinc-100 rounded-xl px-4 py-4 hover:shadow-sm border border-zinc-200 hover:border-zinc-300 transition-all">
       <div className="flex-1"></div>
       <div>
-        <div className="flex items-end">
+        <div className="flex items-end gap-6">
           <Link href={`/dash/track/${poll_id}`}>
-            <a className="flex-1 text-2xl">{title}</a>
+            <a className="flex-1 text-xl">{title}</a>
           </Link>
           <Link href="/dash/track">
-            <a>
+            <a className="group-hover:text-sky-600 group-hover:translate-x-1 group-active:translate-x-2 transition-all">
               <RightIcon />
             </a>
           </Link>
