@@ -1,11 +1,11 @@
-import { useUser, Auth } from '@supabase/supabase-auth-helpers/react';
-import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs';
-import { useEffect, useState } from 'react';
+import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const { user, error } = useUser();
   // const [data, setData] = useState();
-    /*
+  /*
   useEffect(() => {
     async function loadData() {
       const { data } = await supabaseClient.from('test').select('*');
@@ -21,7 +21,7 @@ const LoginPage = () => {
         {error && <p>{error.message}</p>}
         <Auth
           supabaseClient={supabaseClient}
-          providers={['zoom']}
+          providers={["google"]}
           socialLayout="horizontal"
           socialButtonSize="xlarge"
         />
