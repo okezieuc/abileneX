@@ -26,7 +26,9 @@ export default function PollVotePage({ pollData }) {
 
       const { data, error } = await supabaseClient
         .from("poll_votes")
-        .insert([voteData]);
+        .insert([voteData], {
+          returning: "minimal",
+        });
 
       setSendingVote(false);
     } catch (error) {
