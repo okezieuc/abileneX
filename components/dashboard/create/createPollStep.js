@@ -20,7 +20,7 @@ export default function CreatePollStep({
       </div>
       <div className="max-w-xl w-full">
         <div className="text-2xl mb-4">{heading}</div>
-        <div className={`${collapsed ? "hidden" : "block w-full"}`}>
+        <div className={`${collapsed ? "h-0 overflow-hidden" : "block w-full h-36"} transition-all`}>
           {children}
           <div className={`${hasProceed ? "block" : "hidden"}`}>
             <button

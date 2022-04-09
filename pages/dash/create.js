@@ -34,8 +34,8 @@ export default function CreatePollPage() {
         .insert([newPollData]);
       setNewPollId(data[0].poll_id);
 
-      // move to the next step
-      setCurrentStep(currentStep + 1);
+      // move to the next step after 1000ms
+      setTimeout(() => setCurrentStep(currentStep + 1), 1000);
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +44,7 @@ export default function CreatePollPage() {
   return (
     <AppLayout>
       <div className="py-16">
-      <Head>
+        <Head>
           <title>Create AbileneX Poll</title>
         </Head>
         <div className="relative">
@@ -56,9 +56,11 @@ export default function CreatePollPage() {
             <Image src={CreatePageImage} />
           </div>
         </div>
-        {newPollTitle}
-        <button className="hidden" onClick={() => setCurrentStep(1)}>
-          Reset step counter; Current: {currentStep}
+        <button
+          className="hidden"
+          onClick={() => setCurrentStep((currentStep % 3) + 1)}
+        >
+          proceed step counter; Current: {currentStep}
         </button>
         <div className="border-b mt-24 mb-16 -mx-16"></div>
         <div className="w-full">
@@ -115,7 +117,7 @@ export default function CreatePollPage() {
                 We have created a page for you where you will track responses,
                 end the poll, and view results.
               </div>
-              <Link href="/dash/track">
+              <Link href={`/dash/track/${newPollId}`}>
                 <a className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2">
                   Go to tracking page
                 </a>
