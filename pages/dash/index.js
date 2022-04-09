@@ -2,6 +2,7 @@ import AppLayout from "@components/dashboard/appLayout";
 import PollListItem from "@components/dashboard/dash/pollListItem";
 import SearchIcon from "@components/dashboard/icons/searchIcon";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
+import LoadingIndicator from "@components/dashboard/loadingIndicator";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import Head from "next/head";
@@ -68,9 +69,7 @@ export default function Dashboard() {
               />
             ))
           ) : (
-            <div className="bg-sky-700 text-white flex gap-2 h-min px-5 py-3 w-max text-center rounded-full items-center font-semibold">
-              <SpinningIcon /> Please wait while we load your polls.
-            </div>
+            <LoadingIndicator text="Please wait while we load your polls." />
           )}
         </div>
       </div>

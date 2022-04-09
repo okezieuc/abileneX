@@ -1,4 +1,5 @@
 import AppLayout from "@components/dashboard/appLayout";
+import LoadingIndicator from "@components/dashboard/loadingIndicator";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import Head from "next/head";
@@ -30,10 +31,10 @@ export default function TrackPollPage() {
       router.push("/"); // return to the homepage if we receive bad data
     }
 
-    setPollData(data[0]); // update poll data
+    // setPollData(data[0]); // update poll data
 
     if (data[0].accepting_votes == true) {
-      setPollData(data[0]);
+      setTimeout(() => setPollData(data[0]), 1500);
       return;
     } else {
       // continue fetching otherwise
@@ -55,7 +56,7 @@ export default function TrackPollPage() {
 
       setPollVoteRatings(temporaryPollVoteRatings);
       setPollVoteComments(temportaryPollVoteComments);
-      setPollData(data[0]);
+      setTimeout(() => setPollData(data[0]), 1000);
       setPollVoteData(voteData);
     }
   }
@@ -141,7 +142,7 @@ export default function TrackPollPage() {
               )}
             </>
           ) : (
-            "loading poll data"
+            <div className="w-min mx-auto"><LoadingIndicator text="Getting your poll status ready" /></div>
           )}
         </div>
       </>
