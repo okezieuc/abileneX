@@ -1,4 +1,5 @@
 import AppLayout from "@components/dashboard/appLayout";
+import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import LoadingIndicator from "@components/dashboard/loadingIndicator";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
@@ -19,8 +20,9 @@ export default function TrackPollPage() {
   const [pollVoteData, setPollVoteData] = useState(null);
   const [pollVoteRatings, setPollVoteRatings] = useState(null);
   const [pollVoteComments, setPollVoteComments] = useState([]);
+  const [stoppingPoll, setStoppingPoll] = useState(false);
 
-  async function checkPollAcceptingVotes() {
+  async function checkPollAcceptingVotes(loadingAfterStopping = false) {
     // check if the poll is still accepting responses
     const { data } = await supabaseClient
       .from("polls")
@@ -66,6 +68,7 @@ export default function TrackPollPage() {
   }, [user]);
 
   async function stopPollAcceptingVotes() {
+    setStoppingPoll(true);
     const { data, error } = await supabaseClient
       .from("polls")
       .update({ accepting_votes: false })
@@ -99,10 +102,19 @@ export default function TrackPollPage() {
                   </div>
                   <div className="mt-4 w-max mx-auto">
                     <button
-                      className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto"
+                      className="bg-zinc-800 rounded-full text-white text-md w-max px-8 py-2 mx-auto flex w-max"
                       onClick={() => stopPollAcceptingVotes()}
                     >
-                      End poll and view results
+                      {stoppingPoll ? (
+                        <>
+                          <span>
+                            <SpinningIcon />
+                          </span>{" "}
+                          Ending your poll
+                        </>
+                      ) : (
+                        "End poll and view results"
+                      )}
                     </button>
                   </div>
                 </>
@@ -142,7 +154,9 @@ export default function TrackPollPage() {
               )}
             </>
           ) : (
-            <div className="w-min mx-auto"><LoadingIndicator text="Getting your poll status ready" /></div>
+            <div className="w-min mx-auto">
+              <LoadingIndicator text="Getting your poll status ready" />
+            </div>
           )}
         </div>
       </>

@@ -36,7 +36,7 @@ export default function PollVotePage({ pollData }) {
       console.error(error);
     }
   }
-
+setStoppingPoll(false)}
   return (
     <AppLayout>
       <>
