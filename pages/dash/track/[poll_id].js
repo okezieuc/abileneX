@@ -1,4 +1,5 @@
 import AppLayout from "@components/dashboard/appLayout";
+import LinkCopyComponent from "@components/dashboard/create/linkCopyComponent";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import LoadingIndicator from "@components/dashboard/loadingIndicator";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
@@ -96,6 +97,7 @@ export default function TrackPollPage() {
               {pollData.accepting_votes ? (
                 <>
                   <div className="flex-1">
+                    <div className="mx-auto w-min"><LinkCopyComponent id={pollData.poll_id} /></div>
                     <div className="w-56 mx-auto">
                       <Image src={StatusPageImage1} />
                     </div>
@@ -120,29 +122,47 @@ export default function TrackPollPage() {
                 </>
               ) : pollVoteRatings ? (
                 <>
-                  <div className="grid grid-cols-2 mt-8 divide-x divide-solid">
-                    <div className="grid grid-cols-2 h-min">
-                      {[1, 2, 3, 4, 5].map((num) => (
-                        <div className="py-4 text-xl text-center ">
-                          <span className="text-4xl font-semibold mr-2">
-                            {num}
-                          </span>{" "}
-                          {pollVoteRatings[num]} vote(s)
+                  <div className="mt-8  w-full max-w-2xl mx-auto">
+                    <div className="text-3xl font-bold text-center mt-4 mb-12">
+                      Poll <br /> Results
+                    </div>
+                    <div className="grid grid-cols-3 h-min gap-7">
+                      {[1, 2, 3].map((num) => (
+                        <div className="flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50">
+                          <div className="text-3xl mr-2">{num}</div>
+                          <div className="h-6"></div>
+                          <div className="text-lg text-gray-600">
+                            {pollVoteRatings[num]} vote(s)
+                          </div>
                         </div>
                       ))}
                     </div>
+                    <div className="grid grid-cols-6 h-min gap-7 mt-7">
+                      <div></div>
+                      {[4, 5].map((num) => (
+                        <div className="col-span-2 flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50">
+                          <div className="text-3xl mr-2">{num}</div>
+                          <div className="h-6"></div>
+                          <div className="text-lg text-gray-600">
+                            {pollVoteRatings[num]} vote(s)
+                          </div>
+                        </div>
+                      ))}
+                      <div></div>
+                    </div>
+                    <div className="border-b w-full my-24"></div>
                     <div className="">
-                      <h2 className="text-3xl font-semibold mb-4 pl-6">
-                        Feedback responses
+                      <h2 className="text-3xl font-bold mb-4 pl-6 text-center mb-20">
+                        Feedback <br /> responses
                       </h2>
                       {pollVoteComments.length != 0 ? (
-                        <div className="divide-y">
+                        <div className="max-w-xl mx-auto w-full">
                           {pollVoteComments.map((comment) => (
-                            <div className="px-6 py-4">{comment}</div>
+                            <div className="px-6 mb-9 text-lg">{comment}</div>
                           ))}
                         </div>
                       ) : (
-                        <div className="pl-6">
+                        <div className="pl-6 text-center">
                           No optional comments received
                         </div>
                       )}
