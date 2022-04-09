@@ -1,6 +1,7 @@
 import AppLayout from "@components/dashboard/appLayout";
 import PollListItem from "@components/dashboard/dash/pollListItem";
 import SearchIcon from "@components/dashboard/icons/searchIcon";
+import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useUser } from "@supabase/supabase-auth-helpers/react";
 import Head from "next/head";
@@ -18,7 +19,7 @@ export default function Dashboard() {
       const { data } = await supabaseClient
         .from("polls")
         .select("title, poll_id, accepting_votes");
-      setPollListData(data);
+      setTimeout(() => setPollListData(data), 1500);
 
       console.log("loaded poll data");
     }
@@ -52,19 +53,25 @@ export default function Dashboard() {
           </div>
           <div className="ml-2 text-zinc-400">Search</div>
           <div className="flex-1"></div>
-          <div className="text-sm">{pollListData ? pollListData.length : null} results</div>
+          <div className="text-sm">
+            {pollListData ? <>{pollListData.length} results</> : null}
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-8 mt-8">
-          {pollListData
-            ? pollListData.map((poll) => (
-                <PollListItem
-                  title={poll.title}
-                  id={poll.poll_id}
-                  poll_id={poll.poll_id}
-                  acceptingVotes={poll.accepting_votes}
-                />
-              ))
-            : "Loading poll data"}
+          {pollListData ? (
+            pollListData.map((poll) => (
+              <PollListItem
+                title={poll.title}
+                id={poll.poll_id}
+                poll_id={poll.poll_id}
+                acceptingVotes={poll.accepting_votes}
+              />
+            ))
+          ) : (
+            <div className="bg-sky-700 text-white flex gap-2 h-min px-5 py-3 w-max text-center rounded-full items-center font-semibold">
+              <SpinningIcon /> Please wait while we load your polls.
+            </div>
+          )}
         </div>
       </div>
     </AppLayout>

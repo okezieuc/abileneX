@@ -12,9 +12,11 @@ export default function AppLayout({ children }) {
   return (
     <div className="flex">
       <div className="w-28 h-screen bg-zinc-100 px-6 py-9 flex flex-col sticky top-0">
-        <div className="w-24 -mx-4 fill-sky-700">
-          <AbileneXLogoSVG />
-        </div>
+        <Link href="/">
+          <a className="w-24 -mx-4 fill-sky-700 hover:fill-sky-900 transition-all">
+            <AbileneXLogoSVG />
+          </a>
+        </Link>
         <div className="flex-1 w-max mx-auto h-max text-zinc-400">
           <div className="flex flex-col gap-9 h-full">
             <div className="flex-1"></div>
@@ -80,12 +82,7 @@ function AbileneXLogo() {
 }
 function AbileneXLogoSVG() {
   return (
-    <svg
-      width="full"
-      height="full"
-      version="1.1"
-      viewBox="0 0 700 700"
-    >
+    <svg width="full" height="full" version="1.1" viewBox="0 0 700 700">
       <defs>
         <symbol id="m" overflow="visible">
           <path d="m35.391-2.1094c-1.8242 0.9375-3.7266 1.6484-5.7031 2.125-1.9805 0.48828-4.043 0.73438-6.1875 0.73438-6.418 0-11.5-1.7891-15.25-5.375-3.75-3.5938-5.625-8.457-5.625-14.594 0-6.1562 1.875-11.023 5.625-14.609 3.75-3.582 8.832-5.375 15.25-5.375 2.1445 0 4.207 0.24219 6.1875 0.71875 1.9766 0.48047 3.8789 1.1953 5.7031 2.1406v7.9688c-1.8438-1.25-3.6641-2.1641-5.4531-2.75-1.7812-0.59375-3.6641-0.89062-5.6406-0.89062-3.543 0-6.3281 1.1367-8.3594 3.4062-2.0312 2.2734-3.0469 5.4023-3.0469 9.3906 0 3.9688 1.0156 7.0898 3.0469 9.3594 2.0312 2.2734 4.8164 3.4062 8.3594 3.4062 1.9766 0 3.8594-0.28906 5.6406-0.875 1.7891-0.58203 3.6094-1.5 5.4531-2.75z" />
