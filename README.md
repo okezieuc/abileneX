@@ -1,4 +1,5 @@
 # AbileneX
+## The whitepaper
 
 Fun fact: the best way to get feedback on an idea is not by talking about the idea. It's by voting on the idea **anonymously**.
 
@@ -37,18 +38,18 @@ Now you understand the beauty of AbileneX, I invite you to take a bold step. Are
 
 AbileneX was built on Supabase during the Supabase Hackathon.
 
-## Supabase/PostgreSQL features we used
+### Supabase/PostgreSQL features we used
 
 - Supabase Database
 - Supabase Auth
 - Supabase RLS
 
-## And Special thanks to:
+### And Special thanks to:
 
 - Icons8 illustrations for their illustration pack that took the beauty of our UI up a notch.
 - The person who discovered the Abilene paradox. (Btw, his name is Dr. Jerry Harvey)
 - The TailwindCSS contributor that rick-rolled this page on their docs: https://tailwindcss.com/docs/aspect-ratio.
 
-Woah. You made it to the end of our whitepaper. You may want to start creating polls on [your AbileneX dashboard](https://abilenex.okezie.dev), or watch [the Abilene Paradox video](https://www.youtube.com/watch?v=icJK89nnf-Y), or click that tiny little star at the top right corner of this page.
+Woah. You made it to the end of our whitepaper. You may want to go with supaspeed and create a poll on [your AbileneX dashboard](https://abilenex.okezie.dev), or watch [the supa-long Abilene Paradox video](https://www.youtube.com/watch?v=icJK89nnf-Y), or click supa-tiny little star at the top right corner of this page.
 
 Merci.
