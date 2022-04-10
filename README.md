@@ -35,7 +35,7 @@ Now, that's not easy, but trust me, it works. Eventually though, we'll get Abile
 
 At this point, you may be wondering why we said that deciding whether an idea is good by discussing it as a group is a bad idea. Well, the answer to that lies in a paradox in Social Psychology: the Abilene Paradox. (Yup. That's where we got our name from.) I sense that you are curious about what the Abilene paradox is. Here is a link to a really long video explaining the paradox and how it affects us: https://www.youtube.com/watch?v=icJK89nnf-Y. Here is a link to the [trailer to the video.](https://www.youtube.com/watch?v=HBTcLQt-iAs)
 
-No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster of building bad ideas.
+No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster that comes with building bad ideas.
 
 Now you understand the beauty of AbileneX, I invite you to take a bold step. Are you ready to build with confidence? If yes, visit https://abilenex.vercel.app to get started. If no, well, trying it out at https://abilenex.vercel.app may change your mind.
 
@@ -43,7 +43,7 @@ Now you understand the beauty of AbileneX, I invite you to take a bold step. Are
 
 ## For the Supabase Hackathon
 
-AbileneX was built on Supabase during the Supabase Hackathon.
+AbileneX is an anonymous idea voting toll built on Supabase during the Supabase Hackathon.
 
 ### Team Members
 
