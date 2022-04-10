@@ -1,10 +1,11 @@
 import Link from "next/link";
 import HomeIcon from "./icons/homeIcon";
-import InboxIcon from "./icons/inboxIcon";
 import SettingsIcon from "./icons/settingsIcon";
-import UserIcon from "./icons/userIcon";
 import RightSectionContextMenuImage from "../../public/cactus-in-pot.png";
 import Image from "next/image";
+import PlusIcon from "./icons/plusIcon";
+import BarChartIcon from "./icons/barChartIcon";
+import { useRouter } from "next/router";
 
 // <a target="_blank" href="https://icons8.com/icon/101857/xbox-x">Xbox X</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
@@ -20,28 +21,40 @@ export default function AppLayout({ children }) {
         <div className="flex-1 w-max mx-auto h-max text-zinc-400">
           <div className="flex flex-col gap-9 h-full">
             <div className="flex-1"></div>
-            <div className="text-sky-700 active:text-sky-800">
-              <Link href="/dash">
-                <a>
-                  <HomeIcon />
-                </a>
-              </Link>
+            <div className="">
+              <ActiveLink href="/dash">
+                <Link href="/dash">
+                  <a>
+                    <HomeIcon />
+                  </a>
+                </Link>
+              </ActiveLink>
             </div>
             <div>
-              <InboxIcon />
+              <ActiveLink href="/dash/track/[poll_id]">
+                <BarChartIcon />
+              </ActiveLink>
             </div>
             <div>
-              <UserIcon />
+              <ActiveLink href="/dash/create">
+                <Link href="/dash/create">
+                  <a>
+                    <PlusIcon />
+                  </a>
+                </Link>
+              </ActiveLink>
             </div>
             <div className="flex-1"></div>
           </div>
         </div>
-        <div className="w-max mx-auto">
-          <Link href="/dash/settings">
-            <a className="text-zinc-400">
-              <SettingsIcon />
-            </a>
-          </Link>
+        <div className="w-max mx-auto text-zinc-400">
+          <ActiveLink href="/dash/settings">
+            <Link href="/dash/settings">
+              <a>
+                <SettingsIcon />
+              </a>
+            </Link>
+          </ActiveLink>
         </div>
       </div>
       <div className="flex-1 grid grid-cols-7">
@@ -82,6 +95,16 @@ function AbileneXLogo() {
     </div>
   );
 }
+
+function ActiveLink({ href, children }) {
+  const router = useRouter();
+  const style = `${
+    router.pathname === href ? "text-sky-700 hover:text-sky-700" : "text-zinc-400"
+  } hover:text-zinc-600`;
+
+  return <div className={style}>{children}</div>;
+}
+
 function AbileneXLogoSVG() {
   return (
     <svg width="full" height="full" version="1.1" viewBox="0 0 700 700">
