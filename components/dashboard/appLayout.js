@@ -6,10 +6,13 @@ import Image from "next/image";
 import PlusIcon from "./icons/plusIcon";
 import BarChartIcon from "./icons/barChartIcon";
 import { useRouter } from "next/router";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 
 // <a target="_blank" href="https://icons8.com/icon/101857/xbox-x">Xbox X</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 export default function AppLayout({ children }) {
+  const { user, error } = useUser();
+
   return (
     <div className="flex">
       <div className="w-28 h-screen bg-zinc-100 px-6 py-9 flex flex-col sticky top-0">
@@ -61,9 +64,29 @@ export default function AppLayout({ children }) {
         <div className="col-span-5 px-16">{children}</div>
         <div className="col-span-2 h-screen bg-zinc-100 py-16 px-9 sticky top-0">
           <div className="h-full flex flex-col">
-            <div className="h-28 w-28 bg-zinc-300 rounded-full mx-auto mb-6"></div>
+            <div className="h-28 w-28 bg-sky-400 rounded-full mx-auto mb-6 relative">
+              {user ? (
+                user.user_metadata.avatar_url ? (
+                  <Image
+                    src={user.user_metadata.avatar_url}
+                    className="rounded-full"
+                    layout="fill"
+                    alt=""
+                  />
+                ) : (
+                  <Image
+                    src={`https://robohash.org/${user.id}.png`}
+                    className="rounded-full"
+                    layout="fill"
+                    alt=""
+                  />
+                )
+              ) : null}
+            </div>
             <div className="mb-12 text-2xl text-zinc-500 text-center">
-              John Doe
+              {user && user.user_metadata.full_name
+                ? user.user_metadata.full_name
+                : null}
             </div>
             <div className="bg-zinc-800 text-white flex-1 rounded-xl px-8 py-8">
               <div className="h-full flex flex-col">
