@@ -62,14 +62,16 @@ export default function Dashboard() {
         </div>
         <div className="grid grid-cols-2 gap-8 mt-8">
           {pollListData ? (
-            pollListData.map((poll) => (
-              <PollListItem
-                title={poll.title}
-                key={poll.poll_id}
-                poll_id={poll.poll_id}
-                acceptingVotes={poll.accepting_votes}
-              />
-            ))
+            pollListData.length != 0 ? (
+              pollListData.map((poll) => (
+                <PollListItem
+                  title={poll.title}
+                  key={poll.poll_id}
+                  poll_id={poll.poll_id}
+                  acceptingVotes={poll.accepting_votes}
+                />
+              ))
+            ) : <div>You have not created any poll yet. Click <Link href="/dash/create"><a className="underline hover:text-sky-600">here</a></Link> to create your first poll. </div>
           ) : (
             <LoadingIndicator text="Please wait while we load your polls." />
           )}
