@@ -37,9 +37,11 @@ export default function AppLayout({ children }) {
           </div>
         </div>
         <div className="w-max mx-auto">
-          <span className="text-zinc-400">
-            <SettingsIcon />
-          </span>
+          <Link href="/dash/settings">
+            <a className="text-zinc-400">
+              <SettingsIcon />
+            </a>
+          </Link>
         </div>
       </div>
       <div className="flex-1 grid grid-cols-7">
