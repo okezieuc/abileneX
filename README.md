@@ -43,7 +43,9 @@ Now you understand the beauty of AbileneX, I invite you to take a bold step. Are
 
 ## For the Supabase Hackathon
 
-AbileneX is an anonymous idea voting toll built on Supabase during the Supabase Hackathon.
+AbileneX is a useful anonymous idea voting toll built on Supabase during the Supabase Hackathon.
+
+![Voting on ideas with AbileneX vs discussing the idea](https://user-images.githubusercontent.com/53785400/162644716-018728ce-0146-4fd2-8fbc-3d0095c765a4.jpg)
 
 ### Team Members
 
