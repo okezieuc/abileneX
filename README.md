@@ -1,4 +1,5 @@
 # AbileneX
+.. An inspired high school grad reimagines what deciding what ideas to build and skip looks like.
 
 Link to hosted demo: https://abilenex.vercel.app
 
