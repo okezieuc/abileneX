@@ -16,9 +16,19 @@ const LoginPage = () => {
             <div className="text-5xl mt-4 font-bold text-sky-600">AbileneX</div>
           </h1>
           <p className="mt-8 text-lg">
-            AbileneX creates sharable voting links for you to get feedback on
-            your ideas before you start building. AbileneX lets you build with
-            confidence.
+            AbileneX is a free tool that creates sharable voting links for you
+            to get feedback on your ideas before you start building. AbileneX
+            lets you build with confidence.
+          </p>
+          <p className="my-2 text-lg">
+            Read{" "}
+            <a
+              className="underline hover:text-sky-600"
+              href="https://github.com/okezieuc/abilenex"
+            >
+              our whitepaper
+            </a>{" "}
+            to learn more.
           </p>
           <div className="flex-1"></div>
         </div>
