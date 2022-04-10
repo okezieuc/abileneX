@@ -116,7 +116,7 @@ export default function TrackPollPage() {
     // automatically update number of votes received
     async function setupVoteCountSubscription() {
       const updateVoteCount = await supabaseClient
-        .from(`polls:poll_id=${router.query.poll_id}`)
+        .from(`polls:poll_id=eq.${router.query.poll_id}`)
         .on("UPDATE", (payload) => {
           console.log("Change received!", payload);
           setNumberOfVotesReceived(payload.new.number_of_votes_received)
