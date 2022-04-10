@@ -2,6 +2,8 @@ import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import AppLayout from "@components/dashboard/appLayout";
 import Link from "next/link";
+import Image from "next/image";
+import LoggedInImage from "../public/girl-looking-at-laptop.png";
 
 const LoginPage = () => {
   const { user, error } = useUser();
@@ -42,9 +44,14 @@ const LoginPage = () => {
             />
           ) : (
             <>
-              <div className="text-3xl text-center">{"You're set"}</div>
-              <div className="text-md text-center mb-12 text-gray-700 max-w-xs mx-auto">
-                Click the button below to return to your dashboard
+              <div className="text-3xl text-center font-semibold">
+                {"You're set"}
+              </div>
+              <div className="w-56 mx-auto my-4">
+                <Image src={LoggedInImage} alt="" placeholder="blur" />
+              </div>
+              <div className="text-md text-center mb-4 text-gray-700 max-w-xs mx-auto">
+                Click the button below to go to your dashboard
               </div>
               <div className="w-max mx-auto">
                 <Link href="/dash">

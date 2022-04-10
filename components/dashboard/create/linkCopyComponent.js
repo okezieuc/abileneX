@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function LinkCopyComponent({ id = "abcd-1234-wxyz-5678" }) {
   const [clickedCopy, setClickedCopy] = useState(false);
-  const link = `https://3000-okezieuc-abilenex-1nmnkgi4rya.ws-eu38xl.gitpod.io/vote/${id}`;
+  const link = `https://abilenex.vercel.app/vote/${id}`;
 
   return (
     <div className="w-96 px-2 py-2 flex border border-zinc-500 rounded-md items-center gap-2 mb-4">

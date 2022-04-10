@@ -48,7 +48,7 @@ AbileneX was built on Supabase during the Supabase Hackathon.
 
 ### And Special thanks to:
 
-- Icons8 illustrations for their illustration pack that took the beauty of our UI up a notch.
+- Icons8 illustrations for [their illustrations](https://icons8.com/illustrations) that took the beauty of our UI up a notch.
 - [Robohash](https://robohash.org/). We used their image API to generate profile pictures for users signed in with email and password.
 - The person who discovered the Abilene paradox. (Btw, his name is Dr. Jerry Harvey)
 - The TailwindCSS contributor that rick-rolled this page on their docs: https://tailwindcss.com/docs/aspect-ratio.
