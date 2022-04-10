@@ -78,7 +78,7 @@ export default function AppLayout({ children }) {
                 </Link>
               </div>
               <div className="w-32 absolute bottom-16 -right-0 z-0">
-                <Image src={RightSectionContextMenuImage} />
+                <Image src={RightSectionContextMenuImage} alt="" />
               </div>
             </div>
           </div>
@@ -99,7 +99,9 @@ function AbileneXLogo() {
 function ActiveLink({ href, children }) {
   const router = useRouter();
   const style = `${
-    router.pathname === href ? "text-sky-700 hover:text-sky-700" : "text-zinc-400"
+    router.pathname === href
+      ? "text-sky-700 hover:text-sky-700"
+      : "text-zinc-400"
   } hover:text-zinc-600`;
 
   return <div className={style}>{children}</div>;

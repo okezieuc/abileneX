@@ -65,8 +65,51 @@ export default function TrackPollPage() {
   }
 
   useEffect(() => {
+    // TODO: Duplicating this function was a hotfix
+    // ..... remove the duplicate of checkPollAcceptingVotes, run `npx next lint`, and fix the error
+    async function checkPollAcceptingVotes(loadingAfterStopping = false) {
+      // check if the poll is still accepting responses
+      const { data } = await supabaseClient
+        .from("polls")
+        .select("poll_id, title, accepting_votes, number_of_votes_received")
+        .eq("poll_id", router.query.poll_id);
+  
+      if (data.length != 1) {
+        router.push("/"); // return to the homepage if we receive bad data
+      }
+  
+      // setPollData(data[0]); // update poll data
+  
+      if (data[0].accepting_votes == true) {
+        setTimeout(() => setPollData(data[0]), 1500);
+        return;
+      } else {
+        // continue fetching otherwise
+        const { data: voteData } = await supabaseClient
+          .from("poll_votes")
+          .select("vote_id, idea_rating, idea_comment")
+          .eq("poll_id", router.query.poll_id);
+  
+        let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        let temportaryPollVoteComments = [];
+  
+        voteData.forEach((vote) => {
+          temporaryPollVoteRatings[vote.idea_rating] =
+            temporaryPollVoteRatings[vote.idea_rating] + 1;
+          if (vote.idea_comment !== null) {
+            temportaryPollVoteComments.push(vote.idea_comment);
+          }
+        });
+  
+        setPollVoteRatings(temporaryPollVoteRatings);
+        setPollVoteComments(temportaryPollVoteComments);
+        setTimeout(() => setPollData(data[0]), 1000);
+        setPollVoteData(voteData);
+      }
+    }
+
     if (user) checkPollAcceptingVotes();
-  }, [user]);
+  }, [user, router]);
 
   async function stopPollAcceptingVotes() {
     setStoppingPoll(true);
@@ -97,9 +140,11 @@ export default function TrackPollPage() {
               {pollData.accepting_votes ? (
                 <>
                   <div className="flex-1">
-                    <div className="mx-auto w-min"><LinkCopyComponent id={pollData.poll_id} /></div>
+                    <div className="mx-auto w-min">
+                      <LinkCopyComponent id={pollData.poll_id} />
+                    </div>
                     <div className="w-56 mx-auto">
-                      <Image src={StatusPageImage1} />
+                      <Image src={StatusPageImage1} alt="" />
                     </div>
                   </div>
                   <div className="mt-4 w-max mx-auto">
@@ -128,7 +173,10 @@ export default function TrackPollPage() {
                     </div>
                     <div className="grid grid-cols-3 h-min gap-7">
                       {[1, 2, 3].map((num) => (
-                        <div className="flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50">
+                        <div
+                          key={num}
+                          className="flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50"
+                        >
                           <div className="text-3xl mr-2">{num}</div>
                           <div className="h-6"></div>
                           <div className="text-lg text-gray-600">
@@ -140,7 +188,10 @@ export default function TrackPollPage() {
                     <div className="grid grid-cols-6 h-min gap-7 mt-7">
                       <div></div>
                       {[4, 5].map((num) => (
-                        <div className="col-span-2 flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50">
+                        <div
+                          key={num}
+                          className="col-span-2 flex flex-col border border-gray-200 px-4 py-4 text-xl rounded-lg hover:bg-gray-50"
+                        >
                           <div className="text-3xl mr-2">{num}</div>
                           <div className="h-6"></div>
                           <div className="text-lg text-gray-600">
@@ -158,7 +209,9 @@ export default function TrackPollPage() {
                       {pollVoteComments.length != 0 ? (
                         <div className="max-w-xl mx-auto w-full">
                           {pollVoteComments.map((comment) => (
-                            <div className="px-6 mb-9 text-lg">{comment}</div>
+                            <div className="px-6 mb-9 text-lg" key={comment}>
+                              {comment}
+                            </div>
                           ))}
                         </div>
                       ) : (

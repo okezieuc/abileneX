@@ -45,7 +45,7 @@ export default function Dashboard() {
             </a>
           </Link>
           <div className="w-72 absolute top-0 right-0">
-            <Image src={DashBoardImage} />
+            <Image src={DashBoardImage} alt="" />
           </div>
         </div>
         <div className="flex items-center mt-32">
@@ -63,7 +63,7 @@ export default function Dashboard() {
             pollListData.map((poll) => (
               <PollListItem
                 title={poll.title}
-                id={poll.poll_id}
+                key={poll.poll_id}
                 poll_id={poll.poll_id}
                 acceptingVotes={poll.accepting_votes}
               />
