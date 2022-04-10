@@ -4,6 +4,7 @@ import VoteButton from "@components/dashboard/vote/voteButton";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import Head from "next/head";
 import { useState } from "react";
+import { supabaseServiceClient } from "utils/supabaseServiceClient";
 
 export default function PollVotePage({ pollData }) {
   const [ideaVoteRating, setIdeaVoteRating] = useState(null);
@@ -123,7 +124,7 @@ export default function PollVotePage({ pollData }) {
 export async function getServerSideProps({ req, params }) {
   const poll_id = params.poll_id;
 
-  const { data } = await supabaseClient
+  const { data } = await supabaseServiceClient
     .from("polls")
     .select("title, poll_id")
     .eq("poll_id", poll_id)

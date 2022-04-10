@@ -1,5 +1,5 @@
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import getUserIdFromZoomAccountId from "utils/getUserIdFromZoomAccountId";
+import { supabaseServiceClient } from "utils/supabaseServiceClient";
 
 export default function handler(req, res) {
   console.log(req.body);
@@ -29,7 +29,7 @@ export default function handler(req, res) {
 
     if (cAB.command == "create") {
       // create entry for new pool in supabase database
-      const { data, error } = await supabaseClient.from("polls").insert([
+      const { data, error } = await supabaseServiceClient.from("polls").insert([
         {
           creator_id,
           accepting_votes: true,
@@ -55,7 +55,7 @@ export default function handler(req, res) {
     }
     if (cAB.command == "end") {
       // get the last created poll
-      const { data: latestPollData, error } = await supabaseClient
+      const { data: latestPollData, error } = await supabaseServiceClient
         .from("polls")
         .select("poll_id")
         .order("created_at", {
@@ -64,7 +64,7 @@ export default function handler(req, res) {
         .limit(1);
 
       if (latestPollData.length == 1) {
-        const { data, error } = await supabaseClient
+        const { data, error } = await supabaseServiceClient
           .from("polls")
           .update({ accepting_votes: false })
           .match({ poll_id: latestPollData[0].poll_id });
