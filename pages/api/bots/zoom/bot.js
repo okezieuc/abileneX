@@ -10,23 +10,86 @@ export default function handler(req, res) {
       req.body.payload.userId
     );
 
-    // create entry for new pool in supabase database
-    const { data, error } = await supabaseClient.from("polls").insert([
-      {
-        creator_id,
-        accepting_votes: true,
-        title: req.body.payload.cmd,
-      },
-    ]);
+    function getCommandAndBody(cmd) {
+      const splitCmd = cmd.split(" ");
+      if (splitCmd.length == 1) {
+        return {
+          command: splitCmd[0],
+          body: null,
+        };
+      } else {
+        return {
+          command: splitCmd[0],
+          body: cmd.replace(splitCmd[0] + " ", ""),
+        };
+      }
+    }
 
-    if (!error) {
-      getChatbotToken();
-    } else {
-      console.error("Failed to create poll");
+    const cAB = getCommandAndBody(req.body.payload.cmd);
+
+    if (cAB.command == "create") {
+      // create entry for new pool in supabase database
+      const { data, error } = await supabaseClient.from("polls").insert([
+        {
+          creator_id,
+          accepting_votes: true,
+          title: cAB.body,
+        },
+      ]);
+
+      if (!error) {
+        getChatbotToken({
+          head: {
+            text: "abileneX",
+          },
+          body: [
+            {
+              type: "message",
+              text: "You sent " + req.body.payload.cmd,
+            },
+          ],
+        });
+      } else {
+        console.error("Failed to create poll");
+      }
+    }
+    if (cAB.command == "end") {
+      // get the last created poll
+      const { data: latestPollData, error } = await supabaseClient
+        .from("polls")
+        .select("poll_id")
+        .order("created_at", {
+          ascending: false,
+        })
+        .limit(1);
+
+      if (latestPollData.length == 1) {
+        const { data, error } = await supabaseClient
+          .from("polls")
+          .update({ accepting_votes: false })
+          .match({ poll_id: latestPollData[0].poll_id });
+
+        getChatbotToken({
+          head: {
+            text: "abileneX",
+          },
+          body: [
+            {
+              type: "message",
+              text: "Ended " + latestPollData[0].poll_id,
+            },
+          ],
+        });
+      }
+
+      /*
+      
+      checkPollAcceptingVotes();
+      */
     }
   }
 
-  async function getChatbotToken() {
+  async function getChatbotToken(content) {
     try {
       let tokenFetchResponse = await fetch(
         `https://zoom.us/oauth/token?grant_type=client_credentials`,
@@ -45,13 +108,13 @@ export default function handler(req, res) {
       );
       const body = await tokenFetchResponse.json();
       console.log(body);
-      sendChat(body.access_token);
+      sendChat(body.access_token, content);
     } catch (err) {
       console.log("Error getting chatbot_token from Zoom.", err);
     }
   }
 
-  async function sendChat(chatbotToken) {
+  async function sendChat(chatbotToken, content) {
     try {
       console.log("sending message");
       const sendChatRequest = await fetch(
@@ -62,17 +125,7 @@ export default function handler(req, res) {
             robot_jid: process.env.zoom_bot_jid,
             to_jid: req.body.payload.toJid,
             account_id: req.body.payload.accountId,
-            content: {
-              head: {
-                text: "abileneX",
-              },
-              body: [
-                {
-                  type: "message",
-                  text: "You sent " + req.body.payload.cmd,
-                },
-              ],
-            },
+            content: content,
           }),
           headers: {
             "Content-Type": "application/json",
