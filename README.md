@@ -83,6 +83,10 @@ We also use the profile picture and name provided by the auth providers, when co
 
 We use RLS to restrict view and edit access on polls, allowing only the creator of a poll the priviledge to edit the poll. We also use an RLS policy to prevent the creator of a poll from restarting an ended poll. We also use and RLS policy to prevent a poll creator from seeing the results of a poll when they have not already ended the poll. This helps in keeping up with the anonymity of feedback we wish AbileneX to provide.
 
+## Supabase Realtime
+
+We use Supabase Realtime to update the number of votes recieved on the poll status page. This allows the poll creator to make an educated decision on whether, and when, to end a poll. For example, if an AbileneX poll is created in a Zoom meeting of 15 people to get feedback on an idea, the poll creator will be able to watch the counter go up from 0 to 15 (thanks to the realtime subscription). Then will the poll creator end the poll.
+
 ### Screenshots
 The landing page after you log in
 ![landing-page-dashboard](https://user-images.githubusercontent.com/53785400/162643272-be1b3d2c-c571-4504-882e-d4f5b70fdd05.png)

@@ -22,6 +22,7 @@ export default function TrackPollPage() {
   const [pollVoteRatings, setPollVoteRatings] = useState(null);
   const [pollVoteComments, setPollVoteComments] = useState([]);
   const [stoppingPoll, setStoppingPoll] = useState(false);
+  const [numberOfVotesReceived, setNumberOfVotesReceived] = useState(null)
 
   async function checkPollAcceptingVotes(loadingAfterStopping = false) {
     // check if the poll is still accepting responses
@@ -111,6 +112,21 @@ export default function TrackPollPage() {
     if (user) checkPollAcceptingVotes();
   }, [user, router]);
 
+  useEffect(() => {
+    // automatically update number of votes received
+    async function setupVoteCountSubscription() {
+      const updateVoteCount = await supabaseClient
+        .from(`polls:poll_id=${router.query.poll_id}`)
+        .on("UPDATE", (payload) => {
+          console.log("Change received!", payload);
+          setNumberOfVotesReceived(payload.new.number_of_votes_received)
+        })
+        .subscribe();
+    }
+
+    setupVoteCountSubscription()
+  }, [router.query.poll_id]);
+
   async function stopPollAcceptingVotes() {
     setStoppingPoll(true);
     const { data, error } = await supabaseClient
@@ -131,7 +147,7 @@ export default function TrackPollPage() {
               </Head>
               <div className="text-center">
                 <div className="text-2xl text-zinc-500 mb-7 font-light">
-                  {pollData.number_of_votes_received} Response(s) Received
+                  {numberOfVotesReceived ? numberOfVotesReceived : pollData.number_of_votes_received } Response(s) Received
                 </div>
                 <h1 className="text-4xl font-medium max-w-md mb-6 mx-auto">
                   {pollData.title}
