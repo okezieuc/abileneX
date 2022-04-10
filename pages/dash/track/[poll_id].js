@@ -73,13 +73,13 @@ export default function TrackPollPage() {
         .from("polls")
         .select("poll_id, title, accepting_votes, number_of_votes_received")
         .eq("poll_id", router.query.poll_id);
-  
+
       if (data.length != 1) {
         router.push("/"); // return to the homepage if we receive bad data
       }
-  
+
       // setPollData(data[0]); // update poll data
-  
+
       if (data[0].accepting_votes == true) {
         setTimeout(() => setPollData(data[0]), 1500);
         return;
@@ -89,10 +89,10 @@ export default function TrackPollPage() {
           .from("poll_votes")
           .select("vote_id, idea_rating, idea_comment")
           .eq("poll_id", router.query.poll_id);
-  
+
         let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
         let temportaryPollVoteComments = [];
-  
+
         voteData.forEach((vote) => {
           temporaryPollVoteRatings[vote.idea_rating] =
             temporaryPollVoteRatings[vote.idea_rating] + 1;
@@ -100,7 +100,7 @@ export default function TrackPollPage() {
             temportaryPollVoteComments.push(vote.idea_comment);
           }
         });
-  
+
         setPollVoteRatings(temporaryPollVoteRatings);
         setPollVoteComments(temportaryPollVoteComments);
         setTimeout(() => setPollData(data[0]), 1000);
@@ -144,7 +144,7 @@ export default function TrackPollPage() {
                       <LinkCopyComponent id={pollData.poll_id} />
                     </div>
                     <div className="w-56 mx-auto">
-                      <Image src={StatusPageImage1} alt="" />
+                      <Image src={StatusPageImage1} alt="" placeholder="blur" />
                     </div>
                   </div>
                   <div className="mt-4 w-max mx-auto">

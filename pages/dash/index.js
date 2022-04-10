@@ -35,7 +35,9 @@ export default function Dashboard() {
           <title>My AbileneX Dashboard</title>
         </Head>
         <div className="relative">
-          <div className="text-2xl text-zinc-500 mb-7 font-light">Hi, {user ? user.user_metadata.full_name : null}</div>
+          <div className="text-2xl text-zinc-500 mb-7 font-light">
+            Hi, {user ? user.user_metadata.full_name : null}
+          </div>
           <h1 className="text-4xl font-medium max-w-md mb-6">
             It’s time to build with confidence. Create a poll.
           </h1>
@@ -45,7 +47,7 @@ export default function Dashboard() {
             </a>
           </Link>
           <div className="w-72 absolute top-0 right-0">
-            <Image src={DashBoardImage} alt="" />
+            <Image src={DashBoardImage} alt="" placeholder="blur" />
           </div>
         </div>
         <div className="flex items-center mt-32">

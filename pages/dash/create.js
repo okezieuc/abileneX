@@ -53,7 +53,7 @@ export default function CreatePollPage() {
             Let’s get started getting feedback on your ideas.
           </h1>
           <div className="w-80 absolute -top-4 -right-4">
-            <Image src={CreatePageImage} alt="" />
+            <Image src={CreatePageImage} alt="" placeholder="blur" />
           </div>
         </div>
         <button
