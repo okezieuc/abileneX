@@ -83,6 +83,21 @@ We also use the profile picture and name provided by the auth providers, when co
 
 We use RLS to restrict view and edit access on polls, allowing only the creator of a poll the priviledge to edit the poll. We also use an RLS policy to prevent the creator of a poll from restarting an ended poll. We also use and RLS policy to prevent a poll creator from seeing the results of a poll when they have not already ended the poll. This helps in keeping up with the anonymity of feedback we wish AbileneX to provide.
 
+### Screenshots
+The landing page after you log in
+![landing-page-dashboard](https://user-images.githubusercontent.com/53785400/162643272-be1b3d2c-c571-4504-882e-d4f5b70fdd05.png)
+Your dashboard
+![dashboard](https://user-images.githubusercontent.com/53785400/162643280-1a9e6711-ef2a-45e1-a1e1-a458eeb7500f.png)
+The page where you will create polls from
+![create-poll-page](https://user-images.githubusercontent.com/53785400/162643285-6fc408ee-a41a-4e2e-a2e4-4650e414d456.png)
+Your poll status page
+![poll-status-page](https://user-images.githubusercontent.com/53785400/162643288-603e5097-e047-41c6-80a5-55579f9c4122.png)
+The page people you share your voting link with will vote from
+![voting-page](https://user-images.githubusercontent.com/53785400/162643292-e7522904-22af-429e-8c7b-fe24e27b327a.png)
+
+## TODO
+* Build the search feature
+
 ### Special thanks to:
 
 - Icons8 illustrations for [their illustrations](https://icons8.com/illustrations) that took the beauty of our UI up a notch.
