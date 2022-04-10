@@ -35,7 +35,7 @@ Now, that's not easy, but trust me, it works. Eventually though, we'll get Abile
 
 At this point, you may be wondering why we said that deciding whether an idea is good by discussing it as a group is a bad idea. Well, the answer to that lies in a paradox in Social Psychology: the Abilene Paradox. (Yup. That's where we got our name from.) I sense that you are curious about what the Abilene paradox is. Here is a link to a really long video explaining the paradox and how it affects us: https://www.youtube.com/watch?v=icJK89nnf-Y. Here is a link to the [trailer to the video.](https://www.youtube.com/watch?v=HBTcLQt-iAs)
 
-No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster of building bad ideas.
+No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster that comes with building bad ideas.
 
 Now you understand the beauty of AbileneX, I invite you to take a bold step. Are you ready to build with confidence? If yes, visit https://abilenex.vercel.app to get started. If no, well, trying it out at https://abilenex.vercel.app may change your mind.
 
@@ -43,7 +43,7 @@ Now you understand the beauty of AbileneX, I invite you to take a bold step. Are
 
 ## For the Supabase Hackathon
 
-AbileneX was built on Supabase during the Supabase Hackathon.
+AbileneX is an anonymous idea voting toll built on Supabase during the Supabase Hackathon.
 
 ### Team Members
 
@@ -82,6 +82,10 @@ We also use the profile picture and name provided by the auth providers, when co
 #### Supabase RLS
 
 We use RLS to restrict view and edit access on polls, allowing only the creator of a poll the priviledge to edit the poll. We also use an RLS policy to prevent the creator of a poll from restarting an ended poll. We also use and RLS policy to prevent a poll creator from seeing the results of a poll when they have not already ended the poll. This helps in keeping up with the anonymity of feedback we wish AbileneX to provide.
+
+## Supabase Realtime
+
+We use Supabase Realtime to update the number of votes recieved on the poll status page. This allows the poll creator to make an educated decision on whether, and when, to end a poll. For example, if an AbileneX poll is created in a Zoom meeting of 15 people to get feedback on an idea, the poll creator will be able to watch the counter go up from 0 to 15 (thanks to the realtime subscription). Then will the poll creator end the poll.
 
 ### Screenshots
 The landing page after you log in
