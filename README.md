@@ -1,4 +1,6 @@
 # AbileneX
+Link to hosted demo: https://abilenex.vercel.app
+
 ## The whitepaper
 
 Fun fact: the best way to get feedback on an idea is not by talking about the idea. It's by voting on the idea **anonymously**.
@@ -24,7 +26,7 @@ When you do that, the AbileneX bot will automatically create your poll and will 
 
 Easy, right? Yeah, It sure is.
 
-But, there's a little problem. Before Zoom can allow others to use the AbileneX bot connected to my instance of AbileneX at https://abilenex.okezie.dev, Zoom requires me to get my app verified and published on the marketplace. And the verification process is a little bit too difficult to be done during a hackathon. If you are interested in enjoying the simplicity of our AbileneX bot, you will have to create your own Zoom API keys and deploy your own instance of AbileneX.
+But, there's a little problem. Before Zoom can allow others to use the AbileneX bot connected to my instance of AbileneX at https://abilenex.vercel.app, Zoom requires me to get my app verified and published on the marketplace. And the verification process is a little bit too difficult to be done during a hackathon. If you are interested in enjoying the simplicity of our AbileneX bot, you will have to create your own Zoom API keys and deploy your own instance of AbileneX.
 
 Now, that's not easy, but trust me, it works. Eventually though, we'll get AbileneX verified.
 
@@ -32,7 +34,7 @@ At this point, you may be wondering why we said that deciding whether an idea is
 
 No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster of building bad ideas.
 
-Now you understand the beauty of AbileneX, I invite you to take a bold step. Are you ready to build with confidence? If yes, visit https://abilenex.okezie.dev to get started. If no, well, trying it out at https://abilenex.okezie.dev may change your mind.
+Now you understand the beauty of AbileneX, I invite you to take a bold step. Are you ready to build with confidence? If yes, visit https://abilenex.vercel.app to get started. If no, well, trying it out at https://abilenex.vercel.app may change your mind.
 
 <!-- include drake meme here (discussing ideas vs using AbileneX) -->
 
@@ -51,6 +53,6 @@ AbileneX was built on Supabase during the Supabase Hackathon.
 - The person who discovered the Abilene paradox. (Btw, his name is Dr. Jerry Harvey)
 - The TailwindCSS contributor that rick-rolled this page on their docs: https://tailwindcss.com/docs/aspect-ratio.
 
-Woah. You made it to the end of our whitepaper. You may want to go with supaspeed and create a poll on [your AbileneX dashboard](https://abilenex.okezie.dev), or watch [the supa-long Abilene Paradox video](https://www.youtube.com/watch?v=icJK89nnf-Y), or click supa-tiny little star at the top right corner of this page.
+Woah. You made it to the end of our whitepaper. You may want to go with supaspeed and create a poll on [your AbileneX dashboard](https://abilenex.vercel.app), or watch [the supa-long Abilene Paradox video](https://www.youtube.com/watch?v=icJK89nnf-Y), or click supa-tiny little star at the top right corner of this page.
 
 Merci.
