@@ -59,7 +59,7 @@ AbileneX is a useful anonymous idea voting toll built on Supabase during the Sup
 - Visit https://abilenex.vercel.app.
 - Login with Google, or with a username and password
 - After logging in, you will atomatically be redirected back to the landing page. This time, you will see **you're set**. Click **Return to my dashboard** to go your dashboard.
-- This dashboard is where you will see a list of polls you have created. You can click any of those polls to view the status of the polls.
+- This dashboard is where you will see a list of polls you have created. You can click any of those polls to view the status of the polls. When you first create your account, a database trigger that we set up will automatically create a demo poll for you. You will see this demo poll on your dashboard.
 - Click **Create Poll** to create an AbileneX poll to get feedback on an idea.
 - Enter the idea you want to vote on in the textbox provided under **What are we voting on?**. This text will be shown to the people you are receiving feedback from when they visit your voting link. An example is provided as a placeholder.
 - Click proceed to continue.

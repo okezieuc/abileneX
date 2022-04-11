@@ -26,7 +26,7 @@ const LoginPage = () => {
             Read{" "}
             <a
               className="underline hover:text-sky-600"
-              href="https://github.com/okezieuc/abilenex"
+              href="https://github.com/okezieuc/abilenex#the-whitepaper"
             >
               our whitepaper
             </a>{" "}
