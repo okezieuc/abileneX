@@ -1,9 +1,11 @@
 # AbileneX: The Revolutionary Idea Feedback Tool.
+![AbileneX cover image](https://user-images.githubusercontent.com/53785400/162690614-c6770b8c-b798-4074-9838-e71820f7a181.png)
+
 AbileneX is an idea voting tool that helps you get idea feedback that has not been distorted by the Abilene Paradox.
 
 Link to hosted demo: https://abilenex.vercel.app
 
-\* Other required information for the Supabase Hackathon follow after the whitepaper
+\* Other required information for the Supabase Hackathon follow [after the whitepaper](#for-the-supabase-hackathon)
 
 ## The whitepaper
 
@@ -104,6 +106,7 @@ We use Supabase Realtime to update the number of votes recieved on the poll stat
 
 ## TODO
 * Build the search feature
+* Make AbileneX mobile-friendly
 
 ### Special thanks to:
 
