@@ -1,5 +1,5 @@
-# AbileneX
-.. An inspired high school grad reimagines what deciding what ideas to build and skip looks like.
+# AbileneX: The Revolutionary Idea Feedback Tool.
+AbileneX is an idea voting tool that helps you get idea feedback that has not been distorted by the Abilene Paradox.
 
 Link to hosted demo: https://abilenex.vercel.app
 
