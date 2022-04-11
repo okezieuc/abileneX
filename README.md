@@ -34,7 +34,7 @@ But, there's a little problem. Before Zoom can allow others to use the AbileneX 
 
 Now, that's not easy, but trust me, it works. Eventually though, we'll get AbileneX verified.
 
-At this point, you may be wondering why we said that deciding whether an idea is good by discussing it as a group is a bad idea. Well, the answer to that lies in a paradox in Social Psychology: the Abilene Paradox. (Yup. That's where we got our name from.) I sense that you are curious about what the Abilene paradox is. Here is a link to a really long video explaining the paradox and how it affects us: https://www.youtube.com/watch?v=icJK89nnf-Y. Here is a link to the [trailer to the video.](https://www.youtube.com/watch?v=HBTcLQt-iAs)
+At this point, you may be wondering why we said that deciding whether an idea is good or not by discussing it as a group is a bad idea. Well, the answer to that lies in a paradox in Social Psychology: the Abilene Paradox. (Yup. That's where we got our name from.) I sense that you are curious about what the Abilene paradox is. Here is a link to a really long video explaining the paradox and how it affects us: https://www.youtube.com/watch?v=icJK89nnf-Y. Here is a link to the [trailer to the video.](https://www.youtube.com/watch?v=HBTcLQt-iAs)
 
 No, seriously. Watch [the longer video](https://www.youtube.com/watch?v=icJK89nnf-Y). It's fun, informative, and can save you from the disaster that comes with building bad ideas.
 
