@@ -10,14 +10,17 @@ import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
 export default function PollVotePage({ pollData }) {
   const [ideaVoteRating, setIdeaVoteRating] = useState(null);
   const [ideaText, setIdeaText] = useState(null);
-  const [sendingVote, setSendingVote] = useState(false);
+  const [sendingVote, setSendingVote] = useState(0);
 
   async function sendPollVote() {
     try {
-      setSendingVote(true);
+      if(sendingVote == 2) {
+        return
+      }
+      setSendingVote(1);
 
       if (ideaVoteRating == null) {
-        setSendingVote(false);
+        setSendingVote(0);
         return;
       }
 
@@ -33,7 +36,7 @@ export default function PollVotePage({ pollData }) {
           returning: "minimal",
         });
 
-      setSendingVote(false);
+      setSendingVote(2);
     } catch (error) {
       console.error(error);
     }
@@ -106,10 +109,16 @@ export default function PollVotePage({ pollData }) {
               >
                 {sendingVote ? (
                   <>
-                    <span>
-                      <SpinningIcon />
-                    </span>{" "}
-                    Sending your vote{" "}
+                    {sendingVote == 2 ? (
+                      "Your vote has been sent"
+                    ) : (
+                      <>
+                        <span>
+                          <SpinningIcon />
+                        </span>{" "}
+                        Sending your vote
+                      </>
+                    )}
                   </>
                 ) : (
                   "Vote"
