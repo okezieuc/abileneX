@@ -7,7 +7,7 @@ import { useUser } from "@supabase/supabase-auth-helpers/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
 import StatusPageImage1 from "../../../public/girl-stretching.png";
 
@@ -25,10 +25,11 @@ export default function TrackPollPage() {
   const [stoppingPoll, setStoppingPoll] = useState(false);
   const [numberOfVotesReceived, setNumberOfVotesReceived] = useState(null);
 
-  async function checkPollAcceptingVotes(loadingAfterStopping = false) {
-    // check if the poll is still accepting responses
-    const data = await supabaseGraphQLClient(
-      `query LoadPollData($id: UUID!) {
+  const checkPollAcceptingVotes = useCallback(
+    async (loadingAfterStopping = false) => {
+      // check if the poll is still accepting responses
+      const data = await supabaseGraphQLClient(
+        `query LoadPollData($id: UUID!) {
         pollsCollection(filter: {pollId: {eq: $id } }) {
           edges {
             node {
@@ -40,24 +41,24 @@ export default function TrackPollPage() {
           }
         }
       }`,
-      {
-        authorizationKey: accessToken,
-        variables: {
-          id: router.query.poll_id,
-        },
+        {
+          authorizationKey: accessToken,
+          variables: {
+            id: router.query.poll_id,
+          },
+        }
+      );
+
+      if (data.pollsCollection.edges.length != 1) {
+        router.push("/"); // return to the homepage if we receive bad data
       }
-    );
 
-    if (data.pollsCollection.edges.length != 1) {
-      router.push("/"); // return to the homepage if we receive bad data
-    }
-
-    if (data.pollsCollection.edges[0].node.acceptingVotes == true) {
-      setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1500);
-      return;
-    } else {
-      const voteData = await supabaseGraphQLClient(
-        `query LoadVoteData($id: UUID!) {
+      if (data.pollsCollection.edges[0].node.acceptingVotes == true) {
+        setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1500);
+        return;
+      } else {
+        const voteData = await supabaseGraphQLClient(
+          `query LoadVoteData($id: UUID!) {
           pollVotesCollection(filter: {pollId: {eq: $id } }) {
             edges {
               node {
@@ -69,39 +70,38 @@ export default function TrackPollPage() {
             }
           }
         }`,
-        {
-          authorizationKey: accessToken,
-          variables: {
-            id: router.query.poll_id,
-          },
-        }
-      );
+          {
+            authorizationKey: accessToken,
+            variables: {
+              id: router.query.poll_id,
+            },
+          }
+        );
 
-      let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-      let temportaryPollVoteComments = [];
+        let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        let temportaryPollVoteComments = [];
 
-      voteData.pollVotesCollection.edges.forEach((vote) => {
-        temporaryPollVoteRatings[vote.node.ideaRating] =
-          temporaryPollVoteRatings[vote.node.ideaRating] + 1;
-        if (vote.node.ideaComment !== null) {
-          temportaryPollVoteComments.push(vote.node.ideaComment);
-        }
-      });
+        voteData.pollVotesCollection.edges.forEach((vote) => {
+          temporaryPollVoteRatings[vote.node.ideaRating] =
+            temporaryPollVoteRatings[vote.node.ideaRating] + 1;
+          if (vote.node.ideaComment !== null) {
+            temportaryPollVoteComments.push(vote.node.ideaComment);
+          }
+        });
 
-      setPollVoteRatings(temporaryPollVoteRatings);
-      setPollVoteComments(temportaryPollVoteComments);
-      setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1000);
-      setPollVoteData(voteData);
-    }
-  }
-
+        setPollVoteRatings(temporaryPollVoteRatings);
+        setPollVoteComments(temportaryPollVoteComments);
+        setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1000);
+        setPollVoteData(voteData);
+      }
+    },
+    [accessToken, router]
+  );
+  
+  //load data on login
   useEffect(() => {
-    // TODO: Duplicating this function was a hotfix
-    // ..... remove the duplicate of checkPollAcceptingVotes, run `npx next lint`, and fix the error
-    // TODO: Duplicate checkPollAcceptingVotes here
-
     if (user) checkPollAcceptingVotes();
-  }, [user, router]);
+  }, [user, checkPollAcceptingVotes]);
 
   useEffect(() => {
     // automatically update number of votes received
