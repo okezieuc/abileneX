@@ -4,7 +4,8 @@ import VoteButton from "@components/dashboard/vote/voteButton";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import Head from "next/head";
 import { useState } from "react";
-import { supabaseServiceClient } from "utils/supabaseServiceClient";
+import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
+// import { supabaseServiceClient } from "utils/supabaseServiceClient";
 
 export default function PollVotePage({ pollData }) {
   const [ideaVoteRating, setIdeaVoteRating] = useState(null);
@@ -24,7 +25,7 @@ export default function PollVotePage({ pollData }) {
       }
 
       const voteData = {
-        poll_id: pollData.poll_id,
+        poll_id: pollData.node.pollId,
         idea_rating: ideaVoteRating,
         idea_comment: ideaText,
       };
@@ -45,7 +46,7 @@ export default function PollVotePage({ pollData }) {
     <AppLayout>
       <>
         <Head>
-          <title>Vote: {pollData.title}</title>
+          <title>Vote: {pollData.node.title}</title>
         </Head>
         <div className="my-16">
           <div className="text-center">
@@ -53,7 +54,7 @@ export default function PollVotePage({ pollData }) {
               We are asking for your honest feedback
             </div>
             <h1 className="text-4xl font-medium max-w-md mb-6 mx-auto">
-              {pollData.title}
+              {pollData.node.title}
             </h1>
           </div>
           <div>
@@ -134,20 +135,35 @@ export default function PollVotePage({ pollData }) {
 export async function getServerSideProps({ req, params }) {
   const poll_id = params.poll_id;
 
-  const { data } = await supabaseServiceClient
-    .from("polls")
-    .select("title, poll_id")
-    .eq("poll_id", poll_id)
-    .eq("accepting_votes", true);
+  const data = await supabaseGraphQLClient(
+    `query loadPollData($id: UUID!) {
+      pollsCollection(filter: {pollId: {eq: $id }, acceptingVotes: {eq: true} }) {
+        edges {
+          node {
+            title
+            pollId
+          }
+        }
+      }
+    }`,
+    {
+      authorizationKey: process.env.SUPABASE_SERVICE_KEY,
+      variables: {
+        id: poll_id,
+      },
+    }
+  );
 
-  if (data.length != 1) {
+  console.log(JSON.stringify(data));
+
+  if (data.pollsCollection.edges.length != 1) {
     return {
       notFound: true,
     };
   }
   return {
     props: {
-      pollData: data[0],
+      pollData: data.pollsCollection.edges[0],
     },
   };
 }

@@ -9,24 +9,36 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
 import DashBoardImage from "../../public/girl-sitting-at-computer.png";
 
 export default function Dashboard() {
-  const { user, error } = useUser();
+  const { user, accessToken, error } = useUser();
   const [pollListData, setPollListData] = useState(null);
 
   useEffect(() => {
     async function loadPollListData() {
-      const { data } = await supabaseClient
-        .from("polls")
-        .select("title, poll_id, accepting_votes");
+      const data = await supabaseGraphQLClient(
+        `query LoadPollListData {
+        pollsCollection {
+          edges {
+            node {
+              title
+              pollId
+              acceptingVotes
+            }
+          }
+        }
+      }`,
+        {
+          authorizationKey: accessToken,
+        }
+      );
       setTimeout(() => setPollListData(data), 1500);
-
-      console.log("loaded poll data");
     }
 
-    if (user) loadPollListData();
-  }, [user]);
+    if (user && accessToken) loadPollListData();
+  }, [user, accessToken]);
 
   return (
     <AppLayout>
@@ -34,6 +46,7 @@ export default function Dashboard() {
         <Head>
           <title>My AbileneX Dashboard</title>
         </Head>
+
         <div className="relative">
           <div className="text-2xl text-zinc-500 mb-7 font-light">
             Hi, {user ? user.user_metadata.full_name : null}
@@ -57,21 +70,29 @@ export default function Dashboard() {
           <div className="ml-2 text-zinc-400">Search</div>
           <div className="flex-1"></div>
           <div className="text-sm">
-            {pollListData ? <>{pollListData.length} results</> : null}
+            {pollListData ? <>{pollListData.pollsCollection.edges.length} results</> : null}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-8 mt-8">
           {pollListData ? (
-            pollListData.length != 0 ? (
-              pollListData.map((poll) => (
+            pollListData.pollsCollection.edges.length != 0 ? (
+              pollListData.pollsCollection.edges.map((poll) => (
                 <PollListItem
-                  title={poll.title}
-                  key={poll.poll_id}
-                  poll_id={poll.poll_id}
-                  acceptingVotes={poll.accepting_votes}
+                  title={poll.node.title}
+                  key={poll.node.pollId}
+                  poll_id={poll.node.pollId}
+                  acceptingVotes={poll.node.acceptingVotes}
                 />
               ))
-            ) : <div>You have not created any poll yet. Click <Link href="/dash/create"><a className="underline hover:text-sky-600">here</a></Link> to create your first poll. </div>
+            ) : (
+              <div>
+                You have not created any poll yet. Click{" "}
+                <Link href="/dash/create">
+                  <a className="underline hover:text-sky-600">here</a>
+                </Link>{" "}
+                to create your first poll.{" "}
+              </div>
+            )
           ) : (
             <LoadingIndicator text="Please wait while we load your polls." />
           )}
