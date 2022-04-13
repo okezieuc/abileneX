@@ -57,6 +57,10 @@ We use Supabase Realtime to update the number of votes recieved on the poll stat
 
 We use the Supabase GraphQL API to fetch data from the Supabase instance.
 
+## TODO
+* Build the search feature
+* Make AbileneX mobile-friendly
+
 ### Screenshots
 * The landing page after you log in
 ![landing-page-dashboard](https://user-images.githubusercontent.com/53785400/162643272-be1b3d2c-c571-4504-882e-d4f5b70fdd05.png)
@@ -68,10 +72,6 @@ We use the Supabase GraphQL API to fetch data from the Supabase instance.
 ![poll-status-page](https://user-images.githubusercontent.com/53785400/162643288-603e5097-e047-41c6-80a5-55579f9c4122.png)
 * The page people you share your voting link with will vote from
 ![voting-page](https://user-images.githubusercontent.com/53785400/162643292-e7522904-22af-429e-8c7b-fe24e27b327a.png)
-
-## TODO
-* Build the search feature
-* Make AbileneX mobile-friendly
 
 ## The whitepaper
 
