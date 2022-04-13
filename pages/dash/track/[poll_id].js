@@ -49,8 +49,9 @@ export default function TrackPollPage() {
         }
       );
 
+      // return to the homepage in the unlikely event that we receive bad data
       if (data.pollsCollection.edges.length != 1) {
-        router.push("/"); // return to the homepage if we receive bad data
+        router.push("/");
       }
 
       if (data.pollsCollection.edges[0].node.acceptingVotes == true) {
@@ -59,17 +60,17 @@ export default function TrackPollPage() {
       } else {
         const voteData = await supabaseGraphQLClient(
           `query LoadVoteData($id: UUID!) {
-          pollVotesCollection(filter: {pollId: {eq: $id } }) {
-            edges {
-              node {
-                pollId
-                voteId
-                ideaRating
-                ideaComment
+            pollVotesCollection(filter: {pollId: {eq: $id } }) {
+              edges {
+                node {
+                  pollId
+                  voteId
+                  ideaRating
+                  ideaComment
+                }
               }
             }
-          }
-        }`,
+          }`,
           {
             authorizationKey: accessToken,
             variables: {
@@ -97,7 +98,7 @@ export default function TrackPollPage() {
     },
     [accessToken, router]
   );
-  
+
   //load data on login
   useEffect(() => {
     if (user) checkPollAcceptingVotes();
