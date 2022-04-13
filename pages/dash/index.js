@@ -24,8 +24,8 @@ export default function Dashboard() {
           edges {
             node {
               title
-              poll_id
-              accepting_votes
+              pollId
+              acceptingVotes
             }
           }
         }
@@ -79,9 +79,9 @@ export default function Dashboard() {
               pollListData.pollsCollection.edges.map((poll) => (
                 <PollListItem
                   title={poll.node.title}
-                  key={poll.node.poll_id}
-                  poll_id={poll.node.poll_id}
-                  acceptingVotes={poll.node.accepting_votes}
+                  key={poll.node.pollId}
+                  poll_id={poll.node.pollId}
+                  acceptingVotes={poll.node.acceptingVotes}
                 />
               ))
             ) : (
