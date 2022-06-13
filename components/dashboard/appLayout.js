@@ -6,7 +6,7 @@ import Image from "next/image";
 import PlusIcon from "./icons/plusIcon";
 import BarChartIcon from "./icons/barChartIcon";
 import { useRouter } from "next/router";
-import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { useUser } from '@supabase/auth-helpers-react';
 
 // <a target="_blank" href="https://icons8.com/icon/101857/xbox-x">Xbox X</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 

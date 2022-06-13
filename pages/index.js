@@ -1,5 +1,6 @@
-import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { Auth } from "@supabase/ui";
+import { useUser } from "@supabase/auth-helpers-react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import AppLayout from "@components/dashboard/appLayout";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +8,9 @@ import LoggedInImage from "../public/girl-looking-at-laptop.png";
 
 const LoginPage = () => {
   const { user, error } = useUser();
+  // use NEXT_PUBLIC_APP_URL if it is defined. Otherwise, use NEXT_PUBLIC_VERCEL_URL
+  const redirectionURL =
+    process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
 
   return (
     <AppLayout>
@@ -41,6 +45,7 @@ const LoginPage = () => {
               providers={["google"]}
               socialLayout="horizontal"
               socialButtonSize="xlarge"
+              redirectTo={redirectionURL}
             />
           ) : (
             <>
