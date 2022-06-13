@@ -8,6 +8,9 @@ import LoggedInImage from "../public/girl-looking-at-laptop.png";
 
 const LoginPage = () => {
   const { user, error } = useUser();
+  // use NEXT_PUBLIC_APP_URL if it is defined. Otherwise, use NEXT_PUBLIC_VERCEL_URL
+  const redirectionURL =
+    process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
 
   return (
     <AppLayout>
@@ -42,7 +45,7 @@ const LoginPage = () => {
               providers={["google"]}
               socialLayout="horizontal"
               socialButtonSize="xlarge"
-              redirectTo="https://3000-okezieuc-abilenex-mh2ogarglzn.ws-eu47.gitpod.io"
+              redirectTo={redirectionURL}
             />
           ) : (
             <>
