@@ -1,5 +1,6 @@
-import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { Auth } from "@supabase/ui";
+import { useUser } from "@supabase/auth-helpers-react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import AppLayout from "@components/dashboard/appLayout";
 import Link from "next/link";
 import Image from "next/image";
@@ -41,6 +42,7 @@ const LoginPage = () => {
               providers={["google"]}
               socialLayout="horizontal"
               socialButtonSize="xlarge"
+              redirectTo="https://3000-okezieuc-abilenex-mh2ogarglzn.ws-eu47.gitpod.io"
             />
           ) : (
             <>

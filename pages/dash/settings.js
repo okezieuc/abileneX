@@ -1,6 +1,6 @@
 import AppLayout from "@components/dashboard/appLayout";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
-import { useUser } from "@supabase/supabase-auth-helpers/react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export default function SettingsPage() {
   return (

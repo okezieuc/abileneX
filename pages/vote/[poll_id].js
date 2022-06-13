@@ -1,7 +1,7 @@
 import AppLayout from "@components/dashboard/appLayout";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import VoteButton from "@components/dashboard/vote/voteButton";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import Head from "next/head";
 import { useState } from "react";
 import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
