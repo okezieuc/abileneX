@@ -1,4 +1,4 @@
 module.exports = {
-  purge: ["./components/**/*.js", "./pages/**/*.js"],
+  purge: ["./components/**/*.{js,tsx}", "./pages/**/*.{js,tsx}"],
   plugins: [require("@tailwindcss/forms")],
 };
