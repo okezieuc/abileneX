@@ -1,3 +1,4 @@
+import React, { ReactNode } from "react";
 import Link from "next/link";
 import HomeIcon from "./icons/homeIcon";
 import SettingsIcon from "./icons/settingsIcon";
@@ -6,11 +7,9 @@ import Image from "next/image";
 import PlusIcon from "./icons/plusIcon";
 import BarChartIcon from "./icons/barChartIcon";
 import { useRouter } from "next/router";
-import { useUser } from '@supabase/auth-helpers-react';
+import { useUser } from "@supabase/auth-helpers-react";
 
-// <a target="_blank" href="https://icons8.com/icon/101857/xbox-x">Xbox X</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-
-export default function AppLayout({ children }) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, error } = useUser();
 
   return (
@@ -111,15 +110,10 @@ export default function AppLayout({ children }) {
   );
 }
 
-function AbileneXLogo() {
-  return (
-    <div className="bg-sky-700 px-6 py-5 rounded-full font-bold text-white">
-      aX
-    </div>
-  );
-}
-
-function ActiveLink({ href, children }) {
+/**
+ * This component makes the color of a link to stand out if we are on the page that that link refers to
+ */
+function ActiveLink({ href, children }: { href: string; children: ReactNode }) {
   const router = useRouter();
   const style = `${
     router.pathname === href
