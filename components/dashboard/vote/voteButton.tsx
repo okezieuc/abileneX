@@ -1,8 +1,14 @@
+type Props = {
+  number: number;
+  ideaVoteRating: number;
+  setIdeaVoteRating: (number: number) => void;
+};
+
 export default function VoteButton({
   number,
   ideaVoteRating,
   setIdeaVoteRating,
-}) {
+}: Props) {
   return (
     <button
       className={`${
