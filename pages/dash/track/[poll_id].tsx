@@ -2,8 +2,8 @@ import AppLayout from "@components/dashboard/appLayout";
 import LinkCopyComponent from "@components/dashboard/create/linkCopyComponent";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import LoadingIndicator from "@components/dashboard/loadingIndicator";
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
-import { useUser } from '@supabase/auth-helpers-react';
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@supabase/auth-helpers-react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -15,20 +15,49 @@ import StatusPageImage1 from "../../../public/girl-stretching.png";
 // Rename functions and variables
 // Consider fetching initial poll data on server side
 
+type Poll = {
+  pollId: string;
+  title: string;
+  acceptingVotes: boolean;
+  numberOfVotesReceived: number;
+};
+
+type PollList = {
+  pollsCollection: {
+    edges: { node: Poll }[];
+  };
+};
+
+type PollVote = {
+  pollId: string;
+  voteId: string;
+  ideaRating: number;
+  ideaComment: string;
+};
+
+type PollVoteList = {
+  pollVotesCollection: {
+    edges: { node: PollVote }[];
+  };
+};
+
 export default function TrackPollPage() {
   const { user, accessToken, error } = useUser();
   const router = useRouter();
-  const [pollData, setPollData] = useState(null);
-  const [pollVoteData, setPollVoteData] = useState(null);
-  const [pollVoteRatings, setPollVoteRatings] = useState(null);
-  const [pollVoteComments, setPollVoteComments] = useState([]);
+  const [pollData, setPollData] = useState<{ node: Poll } | null>(null);
+  const [pollVoteData, setPollVoteData] = useState<PollVoteList | null>(null);
+  const [pollVoteRatings, setPollVoteRatings] = useState<Record<
+    number,
+    any
+  > | null>(null);
+  const [pollVoteComments, setPollVoteComments] = useState<string[] | null>([]);
   const [stoppingPoll, setStoppingPoll] = useState(false);
   const [numberOfVotesReceived, setNumberOfVotesReceived] = useState(null);
 
   const checkPollAcceptingVotes = useCallback(
     async (loadingAfterStopping = false) => {
       // check if the poll is still accepting responses
-      const data = await supabaseGraphQLClient(
+      const data: PollList = await supabaseGraphQLClient(
         `query LoadPollData($id: UUID!) {
         pollsCollection(filter: {pollId: {eq: $id } }) {
           edges {
@@ -58,7 +87,7 @@ export default function TrackPollPage() {
         setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1500);
         return;
       } else {
-        const voteData = await supabaseGraphQLClient(
+        const voteData: PollVoteList = await supabaseGraphQLClient(
           `query LoadVoteData($id: UUID!) {
             pollVotesCollection(filter: {pollId: {eq: $id } }) {
               edges {
@@ -79,19 +108,25 @@ export default function TrackPollPage() {
           }
         );
 
-        let temporaryPollVoteRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-        let temportaryPollVoteComments = [];
+        let temporaryPollVoteRatings: Record<number, any> = {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0,
+          5: 0,
+        };
+        let temporaryPollVoteComments: string[] = [];
 
         voteData.pollVotesCollection.edges.forEach((vote) => {
           temporaryPollVoteRatings[vote.node.ideaRating] =
             temporaryPollVoteRatings[vote.node.ideaRating] + 1;
           if (vote.node.ideaComment !== null) {
-            temportaryPollVoteComments.push(vote.node.ideaComment);
+            temporaryPollVoteComments.push(vote.node.ideaComment);
           }
         });
 
         setPollVoteRatings(temporaryPollVoteRatings);
-        setPollVoteComments(temportaryPollVoteComments);
+        setPollVoteComments(temporaryPollVoteComments);
         setTimeout(() => setPollData(data.pollsCollection.edges[0]), 1000);
         setPollVoteData(voteData);
       }
@@ -217,7 +252,7 @@ export default function TrackPollPage() {
                       <h2 className="text-3xl font-bold mb-4 pl-6 text-center mb-20">
                         Feedback <br /> responses
                       </h2>
-                      {pollVoteComments.length != 0 ? (
+                      {pollVoteComments && pollVoteComments.length != 0 ? (
                         <div className="max-w-xl mx-auto w-full">
                           {pollVoteComments.map((comment) => (
                             <div className="px-6 mb-9 text-lg" key={comment}>
@@ -247,5 +282,3 @@ export default function TrackPollPage() {
     </AppLayout>
   );
 }
-
-// TODO: Add textarea component after installing tailwincss/forms
