@@ -21,10 +21,11 @@ export default function SettingsPage() {
 
 function ConnectZoomSetting() {
   const { user, error } = useUser();
-  const zoomLoginEnabled = false;
+  const zoomLoginEnabled: boolean = false;
 
   async function ConnectZoomAccount() {
-    const { user, session, error } = await supabaseClient.auth.signIn({
+    await supabaseClient.auth.signIn({
+      // @ts-ignore
       provider: "zoom",
     });
   }

@@ -1,21 +1,36 @@
+import type { GetServerSideProps } from "next";
 import AppLayout from "@components/dashboard/appLayout";
 import SpinningIcon from "@components/dashboard/icons/spinningIcon";
 import VoteButton from "@components/dashboard/vote/voteButton";
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import Head from "next/head";
 import { useState } from "react";
 import { supabaseGraphQLClient } from "utils/supabaseGraphQLClient";
-// import { supabaseServiceClient } from "utils/supabaseServiceClient";
 
-export default function PollVotePage({ pollData }) {
-  const [ideaVoteRating, setIdeaVoteRating] = useState(null);
-  const [ideaText, setIdeaText] = useState(null);
-  const [sendingVote, setSendingVote] = useState(0);
+type Poll = {
+  title: string;
+  pollId: string;
+};
+
+type PollList = {
+  pollsCollection: {
+    edges: { node: Poll }[];
+  };
+};
+
+type Props = {
+  pollData: Poll;
+};
+
+export default function PollVotePage({ pollData }: Props) {
+  const [ideaVoteRating, setIdeaVoteRating] = useState<number | null>(null);
+  const [ideaText, setIdeaText] = useState<string | null>(null);
+  const [sendingVote, setSendingVote] = useState<number>(0);
 
   async function sendPollVote() {
     try {
-      if(sendingVote == 2) {
-        return
+      if (sendingVote == 2) {
+        return;
       }
       setSendingVote(1);
 
@@ -25,7 +40,7 @@ export default function PollVotePage({ pollData }) {
       }
 
       const voteData = {
-        poll_id: pollData.node.pollId,
+        poll_id: pollData.pollId,
         idea_rating: ideaVoteRating,
         idea_comment: ideaText,
       };
@@ -46,7 +61,7 @@ export default function PollVotePage({ pollData }) {
     <AppLayout>
       <>
         <Head>
-          <title>Vote: {pollData.node.title}</title>
+          <title>Vote: {pollData.title}</title>
         </Head>
         <div className="my-16">
           <div className="text-center">
@@ -54,7 +69,7 @@ export default function PollVotePage({ pollData }) {
               We are asking for your honest feedback
             </div>
             <h1 className="text-4xl font-medium max-w-md mb-6 mx-auto">
-              {pollData.node.title}
+              {pollData.title}
             </h1>
           </div>
           <div>
@@ -65,27 +80,27 @@ export default function PollVotePage({ pollData }) {
               <VoteButton
                 number={1}
                 setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
-                ideaVoteRating={ideaVoteRating}
+                ideaVoteRating={ideaVoteRating || -1}
               />
               <VoteButton
                 number={2}
                 setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
-                ideaVoteRating={ideaVoteRating}
+                ideaVoteRating={ideaVoteRating || -1}
               />
               <VoteButton
                 number={3}
                 setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
-                ideaVoteRating={ideaVoteRating}
+                ideaVoteRating={ideaVoteRating || -1}
               />
               <VoteButton
                 number={4}
                 setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
-                ideaVoteRating={ideaVoteRating}
+                ideaVoteRating={ideaVoteRating || -1}
               />
               <VoteButton
                 number={5}
                 setIdeaVoteRating={(rating) => setIdeaVoteRating(rating)}
-                ideaVoteRating={ideaVoteRating}
+                ideaVoteRating={ideaVoteRating || -1}
               />
               <div className="w-max text-zinc-700 text-lg font-semibold ml-4">
                 Awesome idea!
@@ -93,7 +108,6 @@ export default function PollVotePage({ pollData }) {
             </div>
             <div className="max-w-md mx-auto mt-9">
               <textarea
-                type="textarea"
                 placeholder="(optional) The creator of this poll will appreciate you sharing more detail about why you voted what you did, how to improve the idea, or alternatives you suggest?"
                 className="w-full text-lg border-zinc-500 mb-4 rounded-md h-32"
                 autoFocus={true}
@@ -132,10 +146,10 @@ export default function PollVotePage({ pollData }) {
   );
 }
 
-export async function getServerSideProps({ req, params }) {
-  const poll_id = params.poll_id;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const poll_id = params!.poll_id;
 
-  const data = await supabaseGraphQLClient(
+  const data: PollList = await supabaseGraphQLClient(
     `query loadPollData($id: UUID!) {
       pollsCollection(filter: {pollId: {eq: $id }, acceptingVotes: {eq: true} }) {
         edges {
@@ -154,8 +168,6 @@ export async function getServerSideProps({ req, params }) {
     }
   );
 
-  console.log(JSON.stringify(data));
-
   if (data.pollsCollection.edges.length != 1) {
     return {
       notFound: true,
@@ -163,9 +175,9 @@ export async function getServerSideProps({ req, params }) {
   }
   return {
     props: {
-      pollData: data.pollsCollection.edges[0],
+      pollData: data.pollsCollection.edges[0].node,
     },
   };
-}
+};
 
 // TODO: Fetch the name of the poll creator and customize the messages with that name.

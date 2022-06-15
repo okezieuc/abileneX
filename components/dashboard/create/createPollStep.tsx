@@ -1,3 +1,14 @@
+import React, { ReactNode } from "react";
+
+type Props = {
+  heading: string;
+  step: number;
+  hasProceed: boolean;
+  moveToNextStepFunc: () => void;
+  currentStep: number;
+  children: ReactNode;
+};
+
 export default function CreatePollStep({
   heading,
   step,
@@ -5,7 +16,7 @@ export default function CreatePollStep({
   moveToNextStepFunc,
   currentStep,
   children,
-}) {
+}: Props) {
   const collapsed = currentStep != step;
   return (
     <div className="flex gap-4 mb-8 w-full">
@@ -20,7 +31,11 @@ export default function CreatePollStep({
       </div>
       <div className="max-w-xl w-full">
         <div className="text-2xl mb-4">{heading}</div>
-        <div className={`${collapsed ? "h-0 overflow-hidden" : "block w-full h-36"} transition-all`}>
+        <div
+          className={`${
+            collapsed ? "h-0 overflow-hidden" : "block w-full h-36"
+          } transition-all`}
+        >
           {children}
           <div className={`${hasProceed ? "block" : "hidden"}`}>
             <button

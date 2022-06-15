@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LoggedInImage from "../public/girl-looking-at-laptop.png";
 
-const LoginPage = () => {
+function LoginPage() {
   const { user, error } = useUser();
   // use NEXT_PUBLIC_APP_URL if it is defined. Otherwise, use NEXT_PUBLIC_VERCEL_URL
   const redirectionURL =
@@ -77,6 +77,6 @@ const LoginPage = () => {
       </div>
     </AppLayout>
   );
-};
+}
 
 export default LoginPage;

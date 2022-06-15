@@ -1,8 +1,15 @@
 import { useState } from "react";
 
-export default function LinkCopyComponent({ id = "abcd-1234-wxyz-5678" }) {
+type Props = {
+  id: string;
+};
+
+export default function LinkCopyComponent({
+  id = "abcd-1234-wxyz-5678",
+}: Props) {
+  // intitalize state tracker for clickeed status of copy button
   const [clickedCopy, setClickedCopy] = useState(false);
-  const link = `https://abilenex.vercel.app/vote/${id}`;
+  const link: string = `https://abilenex.vercel.app/vote/${id}`;
 
   return (
     <div className="w-96 px-2 py-2 flex border border-zinc-500 rounded-md items-center gap-2 mb-4">
